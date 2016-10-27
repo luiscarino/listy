@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1042460934258",
+    "firebase_url": "https://bucketlist-97375.firebaseio.com",
+    "project_id": "bucketlist-97375",
+    "storage_bucket": "bucketlist-97375.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1042460934258:android:58b9da8d5923392b",
+        "android_client_info": {
+          "package_name": "com.lcarino.bucketlist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1042460934258-gk8t7uptfe5tvtioujciqp9qhmnnc6v3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lcarino.bucketlist",
+            "certificate_hash": "F6DAF6E67AF683F3B97C9B41DAC0F01ECFE49469"
+          }
+        },
+        {
+          "client_id": "1042460934258-4p2qcnc7oqorkbjep2fbalk634fil60u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzkSAbiI0QLOqtoj5_3g3AkSg-2T6YljA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1042460934258-4p2qcnc7oqorkbjep2fbalk634fil60u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
