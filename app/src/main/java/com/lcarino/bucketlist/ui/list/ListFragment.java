@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.BounceInterpolator;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -16,14 +20,13 @@ import com.lcarino.bucketlist.ui.list.model.ListItemModel;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * A fragment that shows a list of bucket items.
  *
  * @author luis.carino
  */
-public class ListFragment extends BaseFragment<ListView, ListPresenter> implements ListView {
+public class ListFragment extends BaseFragment<ListView, ListPresenter> implements ListView, ListRecyclerAdapter.MessageViewHolder.ListActions {
 
     private Listener bucketActivityActions;
     private ListRecyclerAdapter adapter;
@@ -37,6 +40,7 @@ public class ListFragment extends BaseFragment<ListView, ListPresenter> implemen
         void navigateToDetailScreen(String itemId);
 
         void setToolbarTitle(String title);
+
     }
 
     @Override
@@ -52,7 +56,6 @@ public class ListFragment extends BaseFragment<ListView, ListPresenter> implemen
     private String getTitle() {
         return getString(R.string.bucket_list_fragment_title);
     }
-
 
     @Override
     public void onAttach(Context context) {
@@ -76,6 +79,7 @@ public class ListFragment extends BaseFragment<ListView, ListPresenter> implemen
         DatabaseReference reference = instance.getReference("items");
         reference.keepSynced(true);
         adapter = new ListRecyclerAdapter(ListItemModel.class, R.layout.list_item, ListRecyclerAdapter.MessageViewHolder.class, reference);
+        adapter.setListClickListener(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
@@ -83,11 +87,6 @@ public class ListFragment extends BaseFragment<ListView, ListPresenter> implemen
         recyclerView.setAdapter(adapter);
     }
 
-    @OnClick(R.id.fab)
-    public void addNote() {
-        bucketActivityActions.navigateToDetailScreen("id");
-        //adapter.addItem(new ListItemModel());
-    }
 
 
     @Override
@@ -108,5 +107,14 @@ public class ListFragment extends BaseFragment<ListView, ListPresenter> implemen
     @Override
     public void showAddItem() {
 
+    }
+
+    @Override
+    public void onAddClicked(View view, String id) {
+        Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.bounce);
+
+        animation.setInterpolator(new BounceInterpolator());
+
+        view.startAnimation(animation);
     }
 }

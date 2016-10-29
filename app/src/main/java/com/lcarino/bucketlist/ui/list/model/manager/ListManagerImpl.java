@@ -17,7 +17,7 @@ public class ListManagerImpl implements ListManager {
 
     @Inject
     public ListManagerImpl() {
-        realm = Realm.getDefaultInstance();
+//        realm = Realm.getDefaultInstance();
     }
 
     @Override

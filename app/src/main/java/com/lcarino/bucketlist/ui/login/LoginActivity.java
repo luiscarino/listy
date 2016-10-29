@@ -26,20 +26,24 @@ public class LoginActivity extends MvpActivity<LoginView, LoginPresenter> implem
     public static final int RC_SIGN_IN = 9001;
     private LoginComponent loginComponent;
     private GoogleApiClient googleApiClient;
-    @BindView(R.id.login_progress) ProgressBar progressView;
-    @BindView(R.id.email_sign_in_button) Button signInButton;
+    @BindView(R.id.login_progress)
+    ProgressBar progressView;
+    @BindView(R.id.email_sign_in_button)
+    Button signInButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        loginComponent = ((BucketListApplication) getApplication()).getLoginComponent();
-        googleApiClient = ((BucketListApplication) getApplication()).getApplicationComponent().googleApiClient();
-        loginComponent.inject(this);
+
+        loginComponent = ((BucketListApplication) getApplication())
+                .getApplicationComponent().plus(new LoginModule());
+        googleApiClient = loginComponent.googleApiClient();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         presenter.attachView(this);
 
-        if(presenter.isAuthenticated()) {
+        if (presenter.isAuthenticated()) {
             navigateToList();
         }
     }

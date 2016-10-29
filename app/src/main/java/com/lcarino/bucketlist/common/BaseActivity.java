@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import com.lcarino.bucketlist.application.BucketListApplication;
 import com.lcarino.bucketlist.mvp.MvpActivity;
 import com.lcarino.bucketlist.ui.list.di.ListComponent;
+import com.lcarino.bucketlist.ui.list.di.ListModule;
 
 import butterknife.ButterKnife;
 
@@ -23,10 +24,7 @@ public abstract class BaseActivity extends MvpActivity implements BaseFragment.A
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         setContentView(getLayoutResource());
         ButterKnife.bind(this);
-        setSupportActionBar(getToolbar());
-        listComponent = ((BucketListApplication) getApplication()).getListComponent();
-        listComponent.inject(this);
-
+        listComponent = ((BucketListApplication) getApplication()).getApplicationComponent().plus(new ListModule());
         super.onCreate(savedInstanceState);
     }
 

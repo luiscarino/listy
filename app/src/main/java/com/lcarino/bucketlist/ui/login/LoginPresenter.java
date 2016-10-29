@@ -21,7 +21,7 @@ import static org.greenrobot.eventbus.EventBus.TAG;
  * @author Luis Carino.
  */
 
-class LoginPresenter extends MvpBasePresenter<LoginView> {
+public class LoginPresenter extends MvpBasePresenter<LoginView> {
     private FireBaseAccountManager fireBaseAccountManager;
 
     @Inject

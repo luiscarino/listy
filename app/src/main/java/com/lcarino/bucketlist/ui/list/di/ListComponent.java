@@ -1,23 +1,18 @@
 package com.lcarino.bucketlist.ui.list.di;
 
-import com.lcarino.bucketlist.common.BaseActivity;
-import com.lcarino.bucketlist.di.ApplicationModule;
+import com.lcarino.bucketlist.di.FragmentScope;
 import com.lcarino.bucketlist.ui.detail.DetailPresenter;
 import com.lcarino.bucketlist.ui.list.ListPresenter;
 
-import javax.inject.Singleton;
-
-import dagger.Component;
+import dagger.Subcomponent;
 
 /**
  * @author Luis Carino.
  */
 
-@Singleton
-@Component(modules = {ApplicationModule.class, ListModule.class})
+@FragmentScope
+@Subcomponent(modules = {ListModule.class})
 public interface ListComponent {
-
-    void inject(BaseActivity activity);
 
     ListPresenter getListPresenter();
 

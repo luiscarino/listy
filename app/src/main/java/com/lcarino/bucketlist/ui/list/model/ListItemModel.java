@@ -8,6 +8,7 @@ import java.util.Date;
 
 public class ListItemModel {
 
+    public String id;
     public String categoryId;
     public String imageUrl;
     public String title;
@@ -16,6 +17,10 @@ public class ListItemModel {
     public boolean completed;
 
     public ListItemModel() {
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getCategoryId() {

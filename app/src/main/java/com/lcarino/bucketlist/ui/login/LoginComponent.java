@@ -1,19 +1,21 @@
 package com.lcarino.bucketlist.ui.login;
 
-import com.lcarino.bucketlist.di.ApplicationModule;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import javax.inject.Singleton;
 
-import dagger.Component;
+import dagger.Subcomponent;
 
 /**
+ * Sub-component used to provided dependencies for login.
+ *
  * @author Luis Carino.
  */
 @Singleton
-@Component(modules = ApplicationModule.class)
+@Subcomponent(modules = LoginModule.class)
 public interface LoginComponent {
 
-    void inject(LoginActivity loginActivity);
+    GoogleApiClient googleApiClient();
 
     LoginPresenter presenter();
 

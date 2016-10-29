@@ -63,6 +63,7 @@ public abstract class BaseFragment<V extends MvpView, P extends MvpPresenter<V>>
     public abstract int getLayoutRes();
 
     public interface ActivityActions {
+
         void setToolbarTitle(String title);
 
         ListComponent getListComponent();

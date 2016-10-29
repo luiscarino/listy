@@ -18,7 +18,7 @@ public class ExampleUnitTest {
 
     @Before
     public void init() {
-        fireBaseDataBaseManager = new FireBaseDataBaseManager();
+       // fireBaseDataBaseManager = new FireBaseDataBaseManager(new DatabaseReference());
     }
 
     @Test
