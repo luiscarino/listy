@@ -2,7 +2,6 @@ package com.lcarino.bucketlist.ui.list;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
@@ -12,10 +11,10 @@ import android.view.MenuItem;
 import com.lcarino.bucketlist.R;
 import com.lcarino.bucketlist.common.BaseActivity;
 import com.lcarino.bucketlist.mvp.MvpPresenter;
-import com.lcarino.bucketlist.ui.detail.DetailFragment;
+import com.lcarino.bucketlist.ui.list.adapter.TabsViewPagerAdapter;
 
 public class BucketListActivity extends BaseActivity implements
-        ListFragment.Listener {
+        InspirationListFragment.Listener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,29 +24,10 @@ public class BucketListActivity extends BaseActivity implements
         setSupportActionBar(toolbar);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.addTab(tabLayout.newTab().setText("My List"));
-        tabLayout.addTab(tabLayout.newTab().setText("Inspiration"));
-
         ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
-        FragmentPagerAdapter pagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
-
-            final int NUM_PAGES = 2;
-            @Override
-            public Fragment getItem(int position) {
-                if(position == 0 ) {
-                    return new ListFragment();
-                } else {
-                    return new DetailFragment();
-                }
-
-            }
-
-            @Override
-            public int getCount() {
-                return NUM_PAGES;
-            }
-        };
+        FragmentPagerAdapter pagerAdapter = new TabsViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
 
     }
 

@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.BounceInterpolator;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -26,14 +25,18 @@ import butterknife.BindView;
  *
  * @author luis.carino
  */
-public class ListFragment extends BaseFragment<ListView, ListPresenter> implements ListView, ListRecyclerAdapter.MessageViewHolder.ListActions {
+public class InspirationListFragment extends BaseFragment<ListView, ListPresenter> implements ListView, ListRecyclerAdapter.MessageViewHolder.ListActions {
 
     private Listener bucketActivityActions;
     private ListRecyclerAdapter adapter;
     @BindView(R.id.my_recycler_view)
     RecyclerView recyclerView;
 
-    public ListFragment() {
+    public InspirationListFragment() {
+    }
+
+    public static InspirationListFragment newInstance() {
+        return  new InspirationListFragment();
     }
 
     public interface Listener {
@@ -63,7 +66,7 @@ public class ListFragment extends BaseFragment<ListView, ListPresenter> implemen
         if (context instanceof Listener) {
             bucketActivityActions = (Listener) context;
         } else {
-            throw new IllegalStateException("Must implement ListFragment.Listener");
+            throw new IllegalStateException("Must implement InspirationListFragment.Listener");
         }
     }
 
@@ -100,7 +103,7 @@ public class ListFragment extends BaseFragment<ListView, ListPresenter> implemen
     }
 
     @Override
-    public void loadListItems(List<ListItemModel> items) {
+    public void displayListItems(List<ListItemModel> items) {
         //adapter.addAll(items);
     }
 
@@ -111,9 +114,12 @@ public class ListFragment extends BaseFragment<ListView, ListPresenter> implemen
 
     @Override
     public void onAddClicked(View view, String id) {
-        Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.bounce);
 
-        animation.setInterpolator(new BounceInterpolator());
+
+       // Animator animator = AnimatorInflater.loadAnimator(getContext(), R.anim.rotate);
+
+        Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.rotate);
+
 
         view.startAnimation(animation);
     }

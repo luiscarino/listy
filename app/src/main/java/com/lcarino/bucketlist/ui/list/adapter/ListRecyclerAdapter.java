@@ -4,7 +4,6 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -48,7 +47,6 @@ public class ListRecyclerAdapter extends FirebaseRecyclerAdapter<ListItemModel, 
         CardView cardView;
         ImageView imageView;
         ImageButton imageButton;
-        CheckBox item;
         TextView textView;
         ListActions actions;
 
@@ -56,6 +54,7 @@ public class ListRecyclerAdapter extends FirebaseRecyclerAdapter<ListItemModel, 
             super(v);
             cardView = (CardView) v.findViewById(R.id.item_card);
             imageView = (ImageView) v.findViewById(R.id.imageView);
+            textView = (TextView) v.findViewById(R.id.itemTitle);
             imageButton = (ImageButton) v.findViewById(R.id.addButton);
             imageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -70,7 +69,8 @@ public class ListRecyclerAdapter extends FirebaseRecyclerAdapter<ListItemModel, 
         }
 
         public void bind(ListItemModel listItemModel) {
-            Glide.with(imageView.getContext()).load("http://www.w3schools.com/css/img_fjords.jpg").into(imageView);
+            textView.setText(listItemModel.getTitle());
+            Glide.with(imageView.getContext()).load(listItemModel.imageUrl).into(imageView);
         }
 
         public interface ListActions {

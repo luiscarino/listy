@@ -57,7 +57,7 @@ public class ListPresenterTest {
         loadBucketListCaptor.getValue().onListLoaded(new LinkedList<ListItemModel>());
 
         verify(listView).hideProgress();
-        verify(listView).loadListItems(new LinkedList<ListItemModel>());
+        verify(listView).displayListItems(new LinkedList<ListItemModel>());
 
     }
 }

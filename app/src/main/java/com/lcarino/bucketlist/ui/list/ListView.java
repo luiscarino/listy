@@ -15,7 +15,7 @@ interface ListView extends MvpView {
 
     void hideProgress();
 
-    void loadListItems(List<ListItemModel> items);
+    void displayListItems(List<ListItemModel> items);
 
     void showAddItem();
 

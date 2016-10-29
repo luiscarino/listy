@@ -42,7 +42,7 @@ public class ListPresenter extends MvpBasePresenter<ListView> {
                 @Override
                 public void onListLoaded(List<ListItemModel> items) {
                     view.hideProgress();
-                    view.loadListItems(items);
+                    view.displayListItems(items);
                 }
             });
             view.showAddItem();
