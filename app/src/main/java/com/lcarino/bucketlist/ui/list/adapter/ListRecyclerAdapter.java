@@ -4,6 +4,8 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -47,6 +49,7 @@ public class ListRecyclerAdapter extends FirebaseRecyclerAdapter<ListItemModel, 
         CardView cardView;
         ImageView imageView;
         ImageButton imageButton;
+        ImageView loader;
         TextView textView;
         ListActions actions;
 
@@ -56,9 +59,13 @@ public class ListRecyclerAdapter extends FirebaseRecyclerAdapter<ListItemModel, 
             imageView = (ImageView) v.findViewById(R.id.imageView);
             textView = (TextView) v.findViewById(R.id.itemTitle);
             imageButton = (ImageButton) v.findViewById(R.id.addButton);
+            loader = (ImageView) v.findViewById(R.id.loader);
             imageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    loader.setVisibility(View.VISIBLE);
+                    Animation animation = AnimationUtils.loadAnimation(loader.getContext(), R.anim.rotate);
+                    loader.startAnimation(animation);
                     actions.onAddClicked(view, (String)cardView.getTag());
                 }
             });

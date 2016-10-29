@@ -6,8 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -118,9 +116,6 @@ public class InspirationListFragment extends BaseFragment<ListView, ListPresente
 
        // Animator animator = AnimatorInflater.loadAnimator(getContext(), R.anim.rotate);
 
-        Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.rotate);
 
-
-        view.startAnimation(animation);
     }
 }
