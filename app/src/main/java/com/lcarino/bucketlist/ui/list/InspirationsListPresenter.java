@@ -1,8 +1,9 @@
 package com.lcarino.bucketlist.ui.list;
 
+import com.lcarino.bucketlist.model.FireBaseDataBaseManager;
+import com.lcarino.bucketlist.mvp.MvpBasePresenter;
 import com.lcarino.bucketlist.ui.list.model.ListItemModel;
 import com.lcarino.bucketlist.ui.list.model.manager.ListManager;
-import com.lcarino.bucketlist.mvp.MvpBasePresenter;
 
 import java.util.List;
 
@@ -12,13 +13,13 @@ import javax.inject.Inject;
  * @author Luis Carino.
  */
 
-public class ListPresenter extends MvpBasePresenter<ListView> {
+public class InspirationsListPresenter extends MvpBasePresenter<ListView> {
 
-    private ListManager listManager;
+    private FireBaseDataBaseManager fireBaseDataBaseManager;
 
     @Inject
-    public ListPresenter(ListManager listManager) {
-        this.listManager = listManager;
+    public InspirationsListPresenter(FireBaseDataBaseManager fireBaseDataBaseManager) {
+        this.fireBaseDataBaseManager = fireBaseDataBaseManager;
     }
 
     @Override

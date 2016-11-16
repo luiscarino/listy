@@ -18,13 +18,13 @@ import static org.mockito.Mockito.verify;
  * @author Luis Carino.
  */
 
-public class ListPresenterTest {
+public class InspirationsListPresenterTest {
 
     @Mock
     private ListView listView;
     @Mock
     private ListManager listManager;
-    private ListPresenter listPresenter;
+    private InspirationsListPresenter inspirationsListPresenter;
 
     private final String title = "Title";
 
@@ -35,20 +35,20 @@ public class ListPresenterTest {
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
-        listPresenter = new ListPresenter(listManager);
-        listPresenter.attachView(listView);
+        inspirationsListPresenter = new InspirationsListPresenter(listManager);
+        inspirationsListPresenter.attachView(listView);
     }
 
 
     @Test
     public void clickAddNewListItemTest() {
-        listPresenter.addItem(new ListItemModel());
+        inspirationsListPresenter.addItem(new ListItemModel());
         verify(listView).showAddItem();
     }
 
     @Test
     public void fetchListItemsTest() {
-        listPresenter.getList(true);
+        inspirationsListPresenter.getList(true);
 
         // verify the view show progress
         verify(listView).showProgress();
