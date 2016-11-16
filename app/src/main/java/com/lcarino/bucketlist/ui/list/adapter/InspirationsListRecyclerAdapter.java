@@ -14,17 +14,17 @@ import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.Query;
 import com.lcarino.bucketlist.R;
-import com.lcarino.bucketlist.ui.list.model.ListItemModel;
+import com.lcarino.bucketlist.ui.list.model.Inspiration;
 
 /**
  * @author Luis Carino.
  */
 
-public class InspirationsListRecyclerAdapter extends FirebaseRecyclerAdapter<ListItemModel, InspirationsListRecyclerAdapter.MessageViewHolder> {
+public class InspirationsListRecyclerAdapter extends FirebaseRecyclerAdapter<Inspiration, InspirationsListRecyclerAdapter.MessageViewHolder> {
 
     MessageViewHolder.ListActions listActions;
 
-    public InspirationsListRecyclerAdapter(Class<ListItemModel> modelClass, int modelLayout, Class<MessageViewHolder> viewHolderClass, Query ref) {
+    public InspirationsListRecyclerAdapter(Class<Inspiration> modelClass, int modelLayout, Class<MessageViewHolder> viewHolderClass, Query ref) {
         super(modelClass, modelLayout, viewHolderClass, ref);
     }
 
@@ -40,7 +40,7 @@ public class InspirationsListRecyclerAdapter extends FirebaseRecyclerAdapter<Lis
     }
 
     @Override
-    protected void populateViewHolder(MessageViewHolder viewHolder, ListItemModel model, int position) {
+    protected void populateViewHolder(MessageViewHolder viewHolder, Inspiration model, int position) {
         viewHolder.bind(model, position);
     }
 
@@ -129,7 +129,7 @@ public class InspirationsListRecyclerAdapter extends FirebaseRecyclerAdapter<Lis
             actions = listener;
         }
 
-        public void bind(ListItemModel listItemModel, int postion) {
+        public void bind(Inspiration listItemModel, int postion) {
 
             if(frameAdded.getVisibility() == View.VISIBLE) {
                 frameAdded.setVisibility(View.GONE);
@@ -137,8 +137,8 @@ public class InspirationsListRecyclerAdapter extends FirebaseRecyclerAdapter<Lis
             }
 
             cardView.setTag(postion);
-            textView.setText(listItemModel.getTitle());
-            Glide.with(imageView.getContext()).load(listItemModel.imageUrl).into(imageView);
+            textView.setText(listItemModel.title);
+            Glide.with(imageView.getContext()).load(listItemModel.imageURL).into(imageView);
         }
 
         public interface ListActions {

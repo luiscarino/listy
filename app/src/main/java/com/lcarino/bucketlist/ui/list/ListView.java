@@ -1,7 +1,7 @@
 package com.lcarino.bucketlist.ui.list;
 
-import com.lcarino.bucketlist.ui.list.model.ListItemModel;
 import com.lcarino.bucketlist.mvp.MvpView;
+import com.lcarino.bucketlist.ui.list.model.Inspiration;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ interface ListView extends MvpView {
 
     void hideProgress();
 
-    void displayListItems(List<ListItemModel> items);
+    void displayListItems(List<Inspiration> items);
 
     void showAddItem();
 

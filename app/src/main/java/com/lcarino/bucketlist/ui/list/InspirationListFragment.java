@@ -11,8 +11,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.lcarino.bucketlist.R;
 import com.lcarino.bucketlist.common.BaseFragment;
-import com.lcarino.bucketlist.ui.list.adapter.ListRecyclerAdapter;
-import com.lcarino.bucketlist.ui.list.model.ListItemModel;
+import com.lcarino.bucketlist.ui.list.adapter.InspirationsListRecyclerAdapter;
+import com.lcarino.bucketlist.ui.list.model.Inspiration;
 
 import java.util.List;
 
@@ -23,11 +23,11 @@ import butterknife.BindView;
  *
  * @author luis.carino
  */
-public class InspirationListFragment extends BaseFragment<ListView, ListPresenter> implements ListView, ListRecyclerAdapter.MessageViewHolder.ListActions {
+public class InspirationListFragment extends BaseFragment<ListView, InspirationsListPresenter> implements ListView, InspirationsListRecyclerAdapter.MessageViewHolder.ListActions {
 
     private Listener bucketActivityActions;
-    private ListRecyclerAdapter adapter;
-    @BindView(R.id.my_recycler_view)
+    private InspirationsListRecyclerAdapter adapter;
+    @BindView(R.id.myRecyclerView)
     RecyclerView recyclerView;
 
     public InspirationListFragment() {
@@ -46,11 +46,11 @@ public class InspirationListFragment extends BaseFragment<ListView, ListPresente
 
     @Override
     public int getLayoutRes() {
-        return R.layout.fragment_bucket_list;
+        return R.layout.fargment_inspirations_list;
     }
 
     @Override
-    public ListPresenter createPresenter() {
+    public InspirationsListPresenter createPresenter() {
         return activityActions.getListComponent().getListPresenter();
     }
 
@@ -77,9 +77,9 @@ public class InspirationListFragment extends BaseFragment<ListView, ListPresente
 
     private void setUpRecyclerView() {
         FirebaseDatabase instance = FirebaseDatabase.getInstance();
-        DatabaseReference reference = instance.getReference("items");
+        DatabaseReference reference = instance.getReference("inspirations");
         reference.keepSynced(true);
-        adapter = new ListRecyclerAdapter(ListItemModel.class, R.layout.list_item, ListRecyclerAdapter.MessageViewHolder.class, reference);
+        adapter = new InspirationsListRecyclerAdapter(Inspiration.class, R.layout.list_item, InspirationsListRecyclerAdapter.MessageViewHolder.class, reference);
         adapter.setListClickListener(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -101,8 +101,8 @@ public class InspirationListFragment extends BaseFragment<ListView, ListPresente
     }
 
     @Override
-    public void displayListItems(List<ListItemModel> items) {
-        //adapter.addAll(items);
+    public void displayListItems(List<Inspiration> items) {
+
     }
 
     @Override
@@ -111,9 +111,9 @@ public class InspirationListFragment extends BaseFragment<ListView, ListPresente
     }
 
     @Override
-    public void onAddClicked(View view, String id) {
+    public void onAddClicked(View view, int id) {
 
-
+        adapter.getRef(id).removeValue();
        // Animator animator = AnimatorInflater.loadAnimator(getContext(), R.anim.rotate);
 
 

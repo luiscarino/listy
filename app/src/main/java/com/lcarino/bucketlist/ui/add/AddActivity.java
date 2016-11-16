@@ -1,7 +1,9 @@
 package com.lcarino.bucketlist.ui.add;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
+import com.lcarino.bucketlist.R;
 
 public class AddActivity extends AppCompatActivity {
 

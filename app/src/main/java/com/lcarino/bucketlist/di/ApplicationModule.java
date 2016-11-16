@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import org.greenrobot.eventbus.EventBus;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -31,6 +33,12 @@ public class ApplicationModule {
     @Provides
     FirebaseAuth providesFireBaseAuth() {
         return FirebaseAuth.getInstance();
+    }
+
+    @Singleton
+    @Provides
+    EventBus providesEventBus() {
+        return EventBus.getDefault();
     }
 
 }

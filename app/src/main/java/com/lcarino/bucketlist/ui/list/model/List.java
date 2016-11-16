@@ -5,4 +5,6 @@ package com.lcarino.bucketlist.ui.list.model;
  */
 
 public class List {
+
+
 }

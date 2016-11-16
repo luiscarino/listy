@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * A login screen that offers login.
+ * A login screen.
  */
 public class LoginActivity extends MvpActivity<LoginView, LoginPresenter> implements LoginView {
 

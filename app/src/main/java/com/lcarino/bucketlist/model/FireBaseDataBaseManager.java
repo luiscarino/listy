@@ -1,61 +1,204 @@
 package com.lcarino.bucketlist.model;
 
-import android.util.Log;
+import android.support.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
-import com.lcarino.bucketlist.ui.list.model.ListItemModel;
+import com.lcarino.bucketlist.ui.list.model.Entry;
+import com.lcarino.bucketlist.ui.list.model.Inspiration;
+
+import org.greenrobot.eventbus.EventBus;
+
+import java.util.ArrayList;
 
 import javax.inject.Inject;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * A simple manager to handle transactions with Fire Base DB.
  * @author Luis Carino.
  */
 
-public class FireBaseDataBaseManager {
+public class FireBaseDataBaseManager  implements DataBaseManager {
 
-    /// CRUD Create Read Update Delete
+
+    public static final String LIST_ENTRIES = "entries";
+    public static final String INSPIRATIONS = "inspirations";
+    public static final String LISTS = "lists";
+    public static final String USERS = "users";
 
     private DatabaseReference databaseReference;
-    public static final String ITEMS_CHILD = "items";
+    private EventBus eventBus;
 
     @Inject
-    public FireBaseDataBaseManager(DatabaseReference databaseReference) {
+    public FireBaseDataBaseManager(EventBus eventBus, DatabaseReference databaseReference){
+        this.eventBus = eventBus;
         this.databaseReference = databaseReference;
     }
 
-    public void create(ListItemModel item) {
-        databaseReference.child(ITEMS_CHILD).push().setValue(item);
-        read();
-    }
-
-    public void read() {
-        databaseReference.addValueEventListener(new ValueEventListener() {
+    @Override
+    public void fetchInspirations() {
+        databaseReference.child(INSPIRATIONS).addListenerForSingleValueEvent(new ValueEventListener() {
+            ArrayList<Inspiration> inspirationList = new ArrayList<>();
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                ListItemModel value = dataSnapshot.getValue(ListItemModel.class);
-                Log.d(TAG, value.toString());
+                for(DataSnapshot child : dataSnapshot.getChildren()) {
+                    Inspiration inspiration = new Inspiration(child.getKey(),
+                            child.child("title").getValue().toString(),
+                            child.child("imageURL").getValue().toString());
+                    inspirationList.add(inspiration);
+                }
+
+                postInspirationResult(new InspirationsResultEvent(true, inspirationList));
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.e(TAG, databaseError.getMessage());
+                postInspirationResult(new InspirationsResultEvent(false, inspirationList));
             }
         });
     }
 
+    private void postInspirationResult(InspirationsResultEvent inspirationsResultEvent){
+        eventBus.post(inspirationsResultEvent);
+    }
 
-    public void update(String id, Object object) {
+    @Override
+    public void fetchLists() {
+        databaseReference.child(LISTS).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot child : dataSnapshot.getChildren()) {
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
     }
 
+    @Override
+    public void fetchListEntries() {
+        databaseReference.child(LIST_ENTRIES).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
-    public void delete(String id) {
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    @Override
+    public boolean insertEntry(Entry entry) {
+        databaseReference.child(LIST_ENTRIES).push().setValue(entry).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                task.isSuccessful();
+            }
+        });
+        return false;
+    }
+
+    public static class InspirationsResultEvent {
+        private boolean isSuccess;
+        private ArrayList<Inspiration> inspirations;
+
+        public boolean isSuccess() {
+            return isSuccess;
+        }
+
+        public InspirationsResultEvent(boolean isSuccess, ArrayList<Inspiration> inspirations) {
+            this.isSuccess = isSuccess;
+            this.inspirations = inspirations;
+        }
+
+        public void setSuccess(boolean success) {
+            isSuccess = success;
+        }
+
+        public ArrayList<Inspiration> getInspirations() {
+            return inspirations;
+        }
+
+        public void setInspirations(ArrayList<Inspiration> inspirations) {
+            this.inspirations = inspirations;
+        }
     }
 }
+
+
+//    /// CRUD Create Read Update Delete
+//    private DatabaseReference databaseReference;
+//
+//@StringDef({LIST_ENTRIES, INSPIRATIONS, LISTS, USERS})
+//public @interface URLPath{}
+//    public static final String LIST_ENTRIES = "entries";
+//    public static final String INSPIRATIONS = "inspirations";
+//    public static final String LISTS = "lists";
+//    public static final String USERS = "users";
+//
+//    @Inject
+//    public FireBaseDataBaseManager(DatabaseReference databaseReference) {
+//        this.databaseReference = databaseReference;
+//    }
+//
+//
+//    public void create(Inspiration item, final String path) {
+//        databaseReference.child(path).push().setValue(item);
+//        databaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                // ListItemModel value = dataSnapshot.getValue(ListItemModel.class);
+//                Log.d(TAG, dataSnapshot.getValue().toString());
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                Log.e(TAG, databaseError.getMessage());
+//            }
+//        });
+//    }
+//
+//    public void read(final String path) {
+//        databaseReference.child(path).addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                ArrayList<Inspiration> inspirations = new ArrayList<>();
+//                for(DataSnapshot child : dataSnapshot.getChildren()) {
+//                    Inspiration inspiration = new Inspiration(child.getKey(),
+//                            child.child("title").getValue().toString(),
+//                            child.child("imageURL").getValue().toString());
+//                    inspirations.add(inspiration);
+//                }
+//
+//                Log.d("","");
+////                Log.d(getClass().getSimpleName(), inspirations.title);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+//    }
+//
+//
+//    public void update(String id, Object object) {
+//
+//    }
+//
+//
+//    public void delete(String id) {
+//
+//    }

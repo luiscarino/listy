@@ -26,7 +26,7 @@ public class DetailPresenter extends MvpBasePresenter<DetailView> {
 
 
     public void save(ListItemModel listItemModel) {
-       dataBaseManager.create(listItemModel);
+     //  dataBaseManager.create(listItemModel);
     }
 
     public void delete () {

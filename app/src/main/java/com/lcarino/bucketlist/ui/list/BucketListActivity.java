@@ -10,16 +10,23 @@ import android.view.MenuItem;
 
 import com.lcarino.bucketlist.R;
 import com.lcarino.bucketlist.common.BaseActivity;
+import com.lcarino.bucketlist.model.FireBaseDataBaseManager;
 import com.lcarino.bucketlist.mvp.MvpPresenter;
 import com.lcarino.bucketlist.ui.list.adapter.TabsViewPagerAdapter;
 
+import javax.inject.Inject;
+
 public class BucketListActivity extends BaseActivity implements
         InspirationListFragment.Listener {
+
+    @Inject
+    FireBaseDataBaseManager fireBaseDataBaseManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        getListComponent().inject(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -62,6 +69,7 @@ public class BucketListActivity extends BaseActivity implements
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            fireBaseDataBaseManager.fetchInspirations();
             return true;
         }
 

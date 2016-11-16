@@ -2,7 +2,8 @@ package com.lcarino.bucketlist.ui.list.di;
 
 import com.lcarino.bucketlist.di.FragmentScope;
 import com.lcarino.bucketlist.ui.detail.DetailPresenter;
-import com.lcarino.bucketlist.ui.list.ListPresenter;
+import com.lcarino.bucketlist.ui.list.BucketListActivity;
+import com.lcarino.bucketlist.ui.list.InspirationsListPresenter;
 
 import dagger.Subcomponent;
 
@@ -14,7 +15,9 @@ import dagger.Subcomponent;
 @Subcomponent(modules = {ListModule.class})
 public interface ListComponent {
 
-    ListPresenter getListPresenter();
+    void inject(BucketListActivity activity);
+
+    InspirationsListPresenter getListPresenter();
 
     DetailPresenter getDetailPresenter();
 }
