@@ -28,7 +28,7 @@ public class ExampleUnitTest {
 
     @Test
     public void testCreate() {
-       // fireBaseDataBaseManager.create(new LitsItemViewModel(new Date(Calendar.getInstance().getTimeInMillis()), "Nota", "Titulo"));
+       // fireBaseDataBaseManager.create(new BucketListItemViewModel(new Date(Calendar.getInstance().getTimeInMillis()), "Nota", "Titulo"));
 
     }
 }

@@ -19,8 +19,8 @@ public class AddPresenter extends MvpBasePresenter<AddView>{
        this.dataBaseManager  = dataBaseManager;
     }
 
-    public void addEntry(Entry.Builder entry) {
-        dataBaseManager.insertEntry(entry.build());
+    public void addEntry(Entry entry) {
+        dataBaseManager.insertEntry(entry);
     }
 
 }

@@ -114,13 +114,7 @@ public class InspirationsListRecyclerAdapter extends FirebaseRecyclerAdapter<Ins
 
                         }
                     });
-
                     circularReveal.start();
-
-
-
-
-
                 }
             });
         }

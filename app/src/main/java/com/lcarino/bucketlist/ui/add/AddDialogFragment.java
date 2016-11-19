@@ -29,7 +29,6 @@ public class AddDialogFragment extends android.support.v4.app.DialogFragment imp
 
     private AddPresenter presenter;
 
-
     @BindView(editText)
     EditText inputText;
 
@@ -39,7 +38,6 @@ public class AddDialogFragment extends android.support.v4.app.DialogFragment imp
         final ApplicationComponent applicationComponent = ((BucketListApplication) getActivity().getApplication()).getApplicationComponent();
         final AddComponent addComponent = applicationComponent.plus(new AddModule());
         presenter = addComponent.getAddPresenter();
-
     }
 
     @Nullable
@@ -69,7 +67,7 @@ public class AddDialogFragment extends android.support.v4.app.DialogFragment imp
         Entry.Builder builder = new Entry.Builder()
                 .setTitle(inputText.getText().toString())
                 .setTimestamp(getTimestamp());
-        presenter.addEntry(builder);
+        presenter.addEntry(builder.build());
     }
 
     @OnClick(R.id.buttonCancel)
