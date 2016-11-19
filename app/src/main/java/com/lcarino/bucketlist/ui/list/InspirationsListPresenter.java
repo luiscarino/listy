@@ -28,11 +28,6 @@ public class InspirationsListPresenter extends MvpBasePresenter<ListView> {
         this.eventBus.register(this);
     }
 
-    @Override
-    public void attachView(ListView view) {
-        super.attachView(view);
-    }
-
 
     public void addItem(ListItemModel item) {
         if (isViewAttached()) {

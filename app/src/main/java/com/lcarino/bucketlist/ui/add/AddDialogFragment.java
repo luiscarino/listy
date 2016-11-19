@@ -46,6 +46,7 @@ public class AddDialogFragment extends android.support.v4.app.DialogFragment imp
         View view = inflater.inflate(R.layout.fragment_add_dialog, container);
         ButterKnife.bind(this, view);
         getDialog().setCanceledOnTouchOutside(false);
+        presenter.attachView(this);
         return view;
     }
 
@@ -72,7 +73,7 @@ public class AddDialogFragment extends android.support.v4.app.DialogFragment imp
 
     @OnClick(R.id.buttonCancel)
     public void onClickCancel() {
-        dismiss();
+        dismissDialog();
     }
 
     private String getTimestamp() {
@@ -88,5 +89,10 @@ public class AddDialogFragment extends android.support.v4.app.DialogFragment imp
     @Override
     public void hideSoftInput() {
 
+    }
+
+    @Override
+    public void dismissDialog() {
+        dismiss();
     }
 }

@@ -106,7 +106,7 @@ public class FireBaseDataBaseManager  implements DataBaseManager {
         task.addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                task.isSuccessful();
+                eventBus.post(new AddResultEvent(task.isSuccessful()));
             }
         });
     }
@@ -118,6 +118,12 @@ public class FireBaseDataBaseManager  implements DataBaseManager {
         }
 
         public InspirationsResultEvent(ArrayList<Inspiration> payload) {
+            super(payload);
+        }
+    }
+
+    public static class AddResultEvent extends ResultEvent<Boolean> {
+        public AddResultEvent(Boolean payload) {
             super(payload);
         }
     }

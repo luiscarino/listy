@@ -11,4 +11,6 @@ public interface AddView extends MvpView {
     void showSoftInput();
 
     void hideSoftInput();
+
+    void dismissDialog();
 }
