@@ -4,6 +4,7 @@ import com.lcarino.bucketlist.di.FragmentScope;
 import com.lcarino.bucketlist.ui.detail.DetailPresenter;
 import com.lcarino.bucketlist.ui.list.BucketListActivity;
 import com.lcarino.bucketlist.ui.list.InspirationsListPresenter;
+import com.lcarino.bucketlist.ui.list.MyListFragment;
 
 import dagger.Subcomponent;
 
@@ -16,6 +17,8 @@ import dagger.Subcomponent;
 public interface ListComponent {
 
     void inject(BucketListActivity activity);
+
+    void inject(MyListFragment myListFragment);
 
     InspirationsListPresenter getListPresenter();
 

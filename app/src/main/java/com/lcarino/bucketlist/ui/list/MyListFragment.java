@@ -5,18 +5,23 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.lcarino.bucketlist.R;
+import com.lcarino.bucketlist.application.BucketListApplication;
 import com.lcarino.bucketlist.common.BaseFragment;
 import com.lcarino.bucketlist.model.FireBaseDataBaseManager;
 import com.lcarino.bucketlist.model.ui.BucketListItemViewModel;
 import com.lcarino.bucketlist.ui.add.AddDialogFragment;
 import com.lcarino.bucketlist.ui.add.adapter.BucketListRecyclerAdapter;
+import com.lcarino.bucketlist.ui.list.di.ListComponent;
+import com.lcarino.bucketlist.ui.list.di.ListModule;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 
@@ -26,10 +31,11 @@ import butterknife.BindView;
 
 public class MyListFragment extends BaseFragment<ListView, InspirationsListPresenter> {
 
-
     @BindView(R.id.recyclerViewBucketList)
     RecyclerView recyclerView;
     BucketListRecyclerAdapter adapter;
+    @Inject
+    EventBus eventBus;
 
     public static MyListFragment newInstance() {
         return new MyListFragment();
@@ -48,13 +54,26 @@ public class MyListFragment extends BaseFragment<ListView, InspirationsListPrese
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
+        ListComponent listComponent = ((BucketListApplication) getActivity().getApplication()).getApplicationComponent().plus(new ListModule());
+        listComponent.inject(this);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setUpRecyclerView();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        eventBus.register(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        eventBus.unregister(this);
     }
 
     private void setUpRecyclerView() {
@@ -70,22 +89,13 @@ public class MyListFragment extends BaseFragment<ListView, InspirationsListPrese
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        inflater.inflate(R.menu.menu_list_fragment, menu);
-
+    @Subscribe
+    public void onClickEventReceived(BucketListActivity.AddEvent event){
+        displayAddDialog();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_add :
-                AddDialogFragment addDialogFragment = new AddDialogFragment();
-                addDialogFragment.show(getFragmentManager(), AddDialogFragment.class.getSimpleName());
-                return  true;
-        }
-
-        return false;
+    private void displayAddDialog() {
+        AddDialogFragment addDialogFragment = new AddDialogFragment();
+        addDialogFragment.show(getFragmentManager(), AddDialogFragment.class.getSimpleName());
     }
 }

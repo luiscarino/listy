@@ -10,17 +10,24 @@ import android.view.MenuItem;
 
 import com.lcarino.bucketlist.R;
 import com.lcarino.bucketlist.common.BaseActivity;
+import com.lcarino.bucketlist.event.ResultEvent;
 import com.lcarino.bucketlist.model.FireBaseDataBaseManager;
 import com.lcarino.bucketlist.mvp.MvpPresenter;
 import com.lcarino.bucketlist.ui.list.adapter.TabsViewPagerAdapter;
 
+import org.greenrobot.eventbus.EventBus;
+
 import javax.inject.Inject;
+
+import butterknife.OnClick;
 
 public class BucketListActivity extends BaseActivity implements
         InspirationListFragment.Listener {
 
     @Inject
     FireBaseDataBaseManager fireBaseDataBaseManager;
+    @Inject
+    EventBus eventBus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +95,16 @@ public class BucketListActivity extends BaseActivity implements
     @Override
     public void setToolbarTitle(String title) {
 
+    }
+
+    @OnClick(R.id.fab)
+    public void onClickAdd() {
+        // TODO: check view pager and scroll if necessary.
+        eventBus.post(new AddEvent());
+
+    }
+
+    public static class AddEvent extends ResultEvent<Boolean>{
     }
 
 
