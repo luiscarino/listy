@@ -8,6 +8,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.lcarino.bucketlist.event.ResultEvent;
 import com.lcarino.bucketlist.ui.list.model.Entry;
 import com.lcarino.bucketlist.ui.list.model.Inspiration;
 
@@ -52,12 +53,12 @@ public class FireBaseDataBaseManager  implements DataBaseManager {
                     inspirationList.add(inspiration);
                 }
 
-                postInspirationResult(new InspirationsResultEvent(true, inspirationList));
+                postInspirationResult(new InspirationsResultEvent(inspirationList));
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                postInspirationResult(new InspirationsResultEvent(false, inspirationList));
+                postInspirationResult(new InspirationsResultEvent());
             }
         });
     }
@@ -100,39 +101,24 @@ public class FireBaseDataBaseManager  implements DataBaseManager {
     }
 
     @Override
-    public boolean insertEntry(Entry entry) {
-        databaseReference.child(LIST_ENTRIES).push().setValue(entry).addOnCompleteListener(new OnCompleteListener<Void>() {
+    public void insertEntry(Entry entry) {
+        Task<Void> task = databaseReference.child(LIST_ENTRIES).push().setValue(entry);
+        task.addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 task.isSuccessful();
             }
         });
-        return false;
     }
 
-    public static class InspirationsResultEvent {
-        private boolean isSuccess;
-        private ArrayList<Inspiration> inspirations;
+    public static class InspirationsResultEvent  extends ResultEvent<ArrayList<Inspiration>>{
 
-        public boolean isSuccess() {
-            return isSuccess;
+        public InspirationsResultEvent() {
+            super();
         }
 
-        public InspirationsResultEvent(boolean isSuccess, ArrayList<Inspiration> inspirations) {
-            this.isSuccess = isSuccess;
-            this.inspirations = inspirations;
-        }
-
-        public void setSuccess(boolean success) {
-            isSuccess = success;
-        }
-
-        public ArrayList<Inspiration> getInspirations() {
-            return inspirations;
-        }
-
-        public void setInspirations(ArrayList<Inspiration> inspirations) {
-            this.inspirations = inspirations;
+        public InspirationsResultEvent(ArrayList<Inspiration> payload) {
+            super(payload);
         }
     }
 }

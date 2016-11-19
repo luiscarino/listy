@@ -8,6 +8,7 @@ import android.view.MenuItem;
 
 import com.lcarino.bucketlist.R;
 import com.lcarino.bucketlist.common.BaseFragment;
+import com.lcarino.bucketlist.ui.add.AddDialogFragment;
 
 /**
  * @author Luis Carino.

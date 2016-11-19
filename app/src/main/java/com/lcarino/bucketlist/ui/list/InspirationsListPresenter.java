@@ -51,7 +51,7 @@ public class InspirationsListPresenter extends MvpBasePresenter<ListView> {
         if(!isViewAttached()) return;
 
         if(event.isSuccess()) {
-            ArrayList<Inspiration> inspirations = event.getInspirations();
+            ArrayList<Inspiration> inspirations = event.getPayload();
             view.displayListItems(inspirations);
         }
     }

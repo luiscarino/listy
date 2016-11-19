@@ -14,6 +14,6 @@ public interface DataBaseManager {
 
     void fetchListEntries();
 
-    boolean insertEntry(Entry entry);
+    void insertEntry(Entry entry);
 
 }

@@ -1,5 +1,7 @@
 package com.lcarino.bucketlist.di;
 
+import com.lcarino.bucketlist.ui.add.di.AddComponent;
+import com.lcarino.bucketlist.ui.add.di.AddModule;
 import com.lcarino.bucketlist.ui.list.di.ListComponent;
 import com.lcarino.bucketlist.ui.list.di.ListModule;
 import com.lcarino.bucketlist.ui.login.LoginComponent;
@@ -19,5 +21,7 @@ public interface ApplicationComponent {
     LoginComponent plus(LoginModule loginModule);
 
     ListComponent plus(ListModule listModule);
+
+    AddComponent plus(AddModule addComponent);
 
 }
