@@ -1,10 +1,12 @@
 package com.lcarino.bucketlist.ui.detail;
 
+import android.graphics.drawable.Animatable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.lcarino.bucketlist.R;
 import com.lcarino.bucketlist.common.BaseFragment;
@@ -26,6 +28,8 @@ public class DetailFragment extends BaseFragment<DetailView, DetailPresenter>  i
     EditText editTextDescription;
     @BindView(R.id.button_save)
     Button buttonSave;
+    @BindView(R.id.imageView2)
+    ImageView imageView;
 
     public static DetailFragment newInstance(String itemId) {
         Bundle args = new Bundle();
@@ -54,6 +58,14 @@ public class DetailFragment extends BaseFragment<DetailView, DetailPresenter>  i
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         presenter.attachView(this);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((Animatable) imageView.getDrawable()).start();
+            }
+        });
+
     }
 
     @Override

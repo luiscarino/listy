@@ -1,4 +1,4 @@
-package com.lcarino.bucketlist.model;
+package com.lcarino.bucketlist.manager;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -12,6 +12,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.lcarino.bucketlist.model.Account;
 
 import javax.inject.Inject;
 

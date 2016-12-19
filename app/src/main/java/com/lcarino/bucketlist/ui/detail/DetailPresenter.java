@@ -1,6 +1,6 @@
 package com.lcarino.bucketlist.ui.detail;
 
-import com.lcarino.bucketlist.model.FireBaseDataBaseManager;
+import com.lcarino.bucketlist.manager.FireBaseDataBaseManager;
 import com.lcarino.bucketlist.mvp.MvpBasePresenter;
 import com.lcarino.bucketlist.ui.list.model.ListItemModel;
 

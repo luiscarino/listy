@@ -1,4 +1,4 @@
-package com.lcarino.bucketlist.ui.list;
+package com.lcarino.bucketlist.ui.inspirations;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,7 +11,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.lcarino.bucketlist.R;
 import com.lcarino.bucketlist.common.BaseFragment;
-import com.lcarino.bucketlist.ui.list.adapter.InspirationsListRecyclerAdapter;
+import com.lcarino.bucketlist.ui.list.ListView;
+import com.lcarino.bucketlist.ui.inspirations.adapter.InspirationsListRecyclerAdapter;
 import com.lcarino.bucketlist.ui.list.model.Inspiration;
 
 import java.util.List;

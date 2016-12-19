@@ -10,7 +10,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
-import com.lcarino.bucketlist.model.FireBaseAccountManager;
+import com.lcarino.bucketlist.manager.FireBaseAccountManager;
 import com.lcarino.bucketlist.mvp.MvpBasePresenter;
 
 import javax.inject.Inject;

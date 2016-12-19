@@ -1,22 +1,26 @@
 package com.lcarino.bucketlist.ui.list;
 
+import android.animation.Animator;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.lcarino.bucketlist.R;
 import com.lcarino.bucketlist.application.BucketListApplication;
 import com.lcarino.bucketlist.common.BaseFragment;
-import com.lcarino.bucketlist.model.FireBaseDataBaseManager;
+import com.lcarino.bucketlist.manager.FireBaseDataBaseManager;
 import com.lcarino.bucketlist.model.ui.BucketListItemViewModel;
 import com.lcarino.bucketlist.ui.add.AddDialogFragment;
 import com.lcarino.bucketlist.ui.add.adapter.BucketListRecyclerAdapter;
+import com.lcarino.bucketlist.ui.inspirations.InspirationsListPresenter;
 import com.lcarino.bucketlist.ui.list.di.ListComponent;
 import com.lcarino.bucketlist.ui.list.di.ListModule;
+import com.lcarino.bucketlist.util.AnimUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -36,6 +40,8 @@ public class MyListFragment extends BaseFragment<ListView, InspirationsListPrese
     BucketListRecyclerAdapter adapter;
     @Inject
     EventBus eventBus;
+    @BindView(R.id.revealView)
+    View revealView;
 
     public static MyListFragment newInstance() {
         return new MyListFragment();
@@ -90,12 +96,93 @@ public class MyListFragment extends BaseFragment<ListView, InspirationsListPrese
     }
 
     @Subscribe
-    public void onClickEventReceived(BucketListActivity.AddEvent event){
+    public void onClickEventReceived(BucketListActivity.AddEvent event) {
         displayAddDialog();
     }
 
     private void displayAddDialog() {
-        AddDialogFragment addDialogFragment = new AddDialogFragment();
-        addDialogFragment.show(getFragmentManager(), AddDialogFragment.class.getSimpleName());
+        final AddDialogFragment addDialogFragment = new AddDialogFragment();
+        addDialogFragment.addDialogActions(new AddDialogFragment.AddDialogActions() {
+            @Override
+            public void onCancel() {
+                exitReveal(null);
+            }
+
+            @Override
+            public void onAdd() {
+                exitReveal(null);
+            }
+        });
+        startReveal(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+                addDialogFragment.show(getFragmentManager(), AddDialogFragment.class.getSimpleName());
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
+
     }
+
+    private void startReveal(@Nullable Animator.AnimatorListener listener) {
+
+        // get the center for the clipping circle
+        int cx = recyclerView.getMeasuredWidth() / 2;
+        int cy = recyclerView.getMeasuredHeight() / 2;
+
+        // get the final radius for the clipping circle
+        int finalRadius = recyclerView.getHeight();
+
+        AnimUtils.startReveal(revealView, cx, cy, 0, finalRadius, listener);
+
+    }
+
+    private void exitReveal(@Nullable final Animator.AnimatorListener listener) {
+        // get the center for the clipping circle
+        int cx = recyclerView.getMeasuredWidth() / 2;
+        int cy = recyclerView.getMeasuredHeight() / 2;
+
+        // get the final radius for the clipping circle
+        int finalRadius = revealView.getHeight();
+
+        // create the animator for this view (the start radius is zero)
+        AnimUtils.startReveal(revealView, cx, cy, finalRadius, 0, new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                revealView.setVisibility(View.GONE);
+                if (listener != null) {
+                    listener.onAnimationEnd(animator);
+                }
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
+
+    }
+
 }

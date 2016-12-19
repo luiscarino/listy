@@ -1,6 +1,6 @@
 package com.lcarino.bucketlist.model;
 
-import com.google.firebase.database.FirebaseDatabase;
+import com.lcarino.bucketlist.manager.FireBaseDataBaseManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,12 +18,12 @@ public class FireBaseDataBaseManagerTest {
 
     @Before
     public void init() throws Exception {
-        fireBaseDataBaseManager = new FireBaseDataBaseManager(FirebaseDatabase.getInstance().getReference());
+        //fireBaseDataBaseManager = new FireBaseDataBaseManager(FirebaseDatabase.getInstance().getReference());
     }
 
     @Test
     public void testRead() {
-        fireBaseDataBaseManager.read(FireBaseDataBaseManager.INSPIRATIONS);
+       // fireBaseDataBaseManager.read(FireBaseDataBaseManager.INSPIRATIONS);
     }
 
 

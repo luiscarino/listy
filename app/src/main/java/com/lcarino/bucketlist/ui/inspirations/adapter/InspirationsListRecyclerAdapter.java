@@ -1,4 +1,4 @@
-package com.lcarino.bucketlist.ui.list.adapter;
+package com.lcarino.bucketlist.ui.inspirations.adapter;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;

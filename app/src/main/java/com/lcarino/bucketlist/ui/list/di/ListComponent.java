@@ -3,7 +3,7 @@ package com.lcarino.bucketlist.ui.list.di;
 import com.lcarino.bucketlist.di.FragmentScope;
 import com.lcarino.bucketlist.ui.detail.DetailPresenter;
 import com.lcarino.bucketlist.ui.list.BucketListActivity;
-import com.lcarino.bucketlist.ui.list.InspirationsListPresenter;
+import com.lcarino.bucketlist.ui.inspirations.InspirationsListPresenter;
 import com.lcarino.bucketlist.ui.list.MyListFragment;
 
 import dagger.Subcomponent;

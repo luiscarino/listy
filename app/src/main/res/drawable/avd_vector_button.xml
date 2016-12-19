@@ -1,0 +1,143 @@
+<animated-vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <aapt:attr name="android:drawable">
+        <vector
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:width="48dp"
+            android:height="48dp"
+            android:viewportWidth="48"
+            android:viewportHeight="48">
+            <group android:name="page_1">
+                <group android:name="48_mdpi">
+                    <path
+                        android:name="oval_1"
+                        android:pathData="M 24.5 6 A 18.5,18.5,0,1,0,24.5,43 A 18.5,18.5,0,1,0,24.5,6 Z"
+                        android:strokeColor="#ff9b9b9b"
+                        android:strokeAlpha="0"
+                        android:strokeWidth="1"
+                        android:strokeLineCap="butt"
+                        android:strokeLineJoin="miter"
+                        android:strokeMiterLimit="10"/>
+                    <path
+                        android:name="oval"
+                        android:pathData="M 24.5 6 A 18.5,18.5,0,1,0,24.5,43 A 18.5,18.5,0,1,0,24.5,6 Z"
+                        android:fillColor="#ff92a722"
+                        android:strokeWidth="1"
+                        android:strokeLineCap="butt"
+                        android:strokeLineJoin="miter"
+                        android:strokeMiterLimit="10"/>
+                </group>
+            </group>
+            <group android:name="page_1_1">
+                <group android:name="48_mdpi_1">
+                    <group android:name="plus">
+                        <path
+                            android:name="line"
+                            android:pathData="M 24 11.5 L 24 38.5"
+                            android:strokeColor="#ffffffff"
+                            android:strokeWidth="2"
+                            android:strokeLineCap="square"
+                            android:strokeLineJoin="miter"
+                            android:strokeMiterLimit="10"/>
+                        <path
+                            android:name="line_1"
+                            android:pathData="M 10.5 23 L 37.5 23"
+                            android:strokeColor="#ffffffff"
+                            android:strokeWidth="2"
+                            android:strokeLineCap="square"
+                            android:strokeLineJoin="miter"
+                            android:strokeMiterLimit="10"/>
+                    </group>
+                </group>
+            </group>
+            <group android:name="page_1_2">
+                <group android:name="48_mdpi_2">
+                    <group android:name="plus_1"/>
+                </group>
+            </group>
+        </vector>
+    </aapt:attr>
+    <target android:name="oval">
+        <aapt:attr name="android:animation">
+            <set xmlns:android="http://schemas.android.com/apk/res/android">
+                <objectAnimator
+                    android:name="oval"
+                    android:propertyName="pathData"
+                    android:duration="3000"
+                    android:valueFrom="M 24.5 6 A 18.5,18.5,0,1,0,24.5,43 A 18.5,18.5,0,1,0,24.5,6 Z"
+                    android:valueTo="M 25 11 A 14,14,0,1,0,25,39 A 14,14,0,1,0,25,11 Z"
+                    android:valueType="pathType"
+                    android:interpolator="@android:anim/accelerate_decelerate_interpolator"/>
+                <objectAnimator
+                    android:name="oval"
+                    android:propertyName="pathData"
+                    android:startOffset="3000"
+                    android:duration="1325"
+                    android:valueFrom="M 24.949 10.486 A 14.462805646952763,14.462805646952763,0,1,0,24.948577150338583,39.411382797291346 A 14.462805646952763,14.462805646952763,0,1,0,24.948577150338583,10.485771503385818 Z"
+                    android:valueTo="M 24.5 6 A 18.5,18.5,0,1,0,24.5,43 A 18.5,18.5,0,1,0,24.5,6 Z"
+                    android:valueType="pathType"
+                    android:interpolator="@android:anim/accelerate_decelerate_interpolator"/>
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="oval_1">
+        <aapt:attr name="android:animation">
+            <set xmlns:android="http://schemas.android.com/apk/res/android">
+                <objectAnimator
+                    android:name="oval_1"
+                    android:propertyName="strokeAlpha"
+                    android:startOffset="2999"
+                    android:duration="1326"
+                    android:valueFrom="0"
+                    android:valueTo="0.5"
+                    android:valueType="floatType"
+                    android:interpolator="@android:anim/accelerate_decelerate_interpolator"/>
+                <objectAnimator
+                    android:name="oval_1"
+                    android:propertyName="pathData"
+                    android:startOffset="2999"
+                    android:duration="729"
+                    android:valueFrom="M 24.5 6 A 18.5,18.5,0,1,0,24.5,43 A 18.5,18.5,0,1,0,24.5,6 Z"
+                    android:valueTo="M 24.5 1 A 23.5,23.5,0,1,0,24.5,48 A 23.5,23.5,0,1,0,24.5,1 Z"
+                    android:valueType="pathType"
+                    android:interpolator="@android:anim/accelerate_decelerate_interpolator"/>
+                <objectAnimator
+                    android:name="oval_1"
+                    android:propertyName="strokeAlpha"
+                    android:startOffset="4325"
+                    android:duration="650"
+                    android:valueFrom="0.5"
+                    android:valueTo="0"
+                    android:valueType="floatType"
+                    android:interpolator="@android:anim/accelerate_decelerate_interpolator"/>
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="line">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:name="line"
+                android:propertyName="pathData"
+                android:duration="3001"
+                android:valueFrom="M 24 11.5 L 24 38.5"
+                android:valueTo="M 24.5 15.375 L 24.5 35.625"
+                android:valueType="pathType"
+                android:interpolator="@android:anim/accelerate_decelerate_interpolator"/>
+        </aapt:attr>
+    </target>
+    <target android:name="line_1">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:name="line_1"
+                android:propertyName="pathData"
+                android:duration="3000"
+                android:valueFrom="M 10.5 23 L 37.5 23"
+                android:valueTo="M 14.375 24 L 34.625 24"
+                android:valueType="pathType"
+                android:interpolator="@android:anim/accelerate_decelerate_interpolator"/>
+        </aapt:attr>
+    </target>
+</animated-vector>

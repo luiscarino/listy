@@ -7,7 +7,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.lcarino.bucketlist.R;
-import com.lcarino.bucketlist.model.FireBaseAccountManager;
+import com.lcarino.bucketlist.manager.FireBaseAccountManager;
 
 import javax.inject.Singleton;
 

@@ -27,7 +27,12 @@ import static com.lcarino.bucketlist.R.id.editText;
 
 public class AddDialogFragment extends android.support.v4.app.DialogFragment implements AddView {
 
+    public interface AddDialogActions {
+        void onCancel();
+        void onAdd();
+    }
     private AddPresenter presenter;
+    private AddDialogActions addDialogActions;
 
     @BindView(editText)
     EditText inputText;
@@ -69,11 +74,17 @@ public class AddDialogFragment extends android.support.v4.app.DialogFragment imp
                 .setTitle(inputText.getText().toString())
                 .setTimestamp(getTimestamp());
         presenter.addEntry(builder.build());
+        if(addDialogActions != null) {
+            addDialogActions.onAdd();
+        }
     }
 
     @OnClick(R.id.buttonCancel)
     public void onClickCancel() {
         dismissDialog();
+        if(addDialogActions != null) {
+            addDialogActions.onCancel();
+        }
     }
 
     private String getTimestamp() {
@@ -94,5 +105,9 @@ public class AddDialogFragment extends android.support.v4.app.DialogFragment imp
     @Override
     public void dismissDialog() {
         dismiss();
+    }
+
+    public void addDialogActions(AddDialogActions addDialogActions) {
+        this.addDialogActions = addDialogActions;
     }
 }

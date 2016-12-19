@@ -7,9 +7,9 @@
     android:id="@+id/constraintLayout">
 
     <ImageView
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/image_placeholder"
+        android:src="@drawable/animated_drawable"
         android:id="@+id/imageView2"
         android:scaleType="centerCrop"
         app:layout_constraintRight_toRightOf="parent"

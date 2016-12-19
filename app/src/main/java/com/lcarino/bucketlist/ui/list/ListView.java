@@ -9,7 +9,7 @@ import java.util.List;
  * @author Luis Carino.
  */
 
-interface ListView extends MvpView {
+public interface ListView extends MvpView {
 
     void showProgress();
 

@@ -1,4 +1,4 @@
-package com.lcarino.bucketlist.model;
+package com.lcarino.bucketlist.manager;
 
 import android.support.annotation.NonNull;
 

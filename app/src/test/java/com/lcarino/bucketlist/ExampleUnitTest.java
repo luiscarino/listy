@@ -1,6 +1,6 @@
 package com.lcarino.bucketlist;
 
-import com.lcarino.bucketlist.model.FireBaseDataBaseManager;
+import com.lcarino.bucketlist.manager.FireBaseDataBaseManager;
 
 import org.junit.Before;
 import org.junit.Test;

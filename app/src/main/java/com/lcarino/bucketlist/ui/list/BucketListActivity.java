@@ -1,24 +1,28 @@
 package com.lcarino.bucketlist.ui.list;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.lcarino.bucketlist.R;
 import com.lcarino.bucketlist.common.BaseActivity;
 import com.lcarino.bucketlist.event.ResultEvent;
-import com.lcarino.bucketlist.model.FireBaseDataBaseManager;
+import com.lcarino.bucketlist.manager.FireBaseDataBaseManager;
 import com.lcarino.bucketlist.mvp.MvpPresenter;
+import com.lcarino.bucketlist.ui.inspirations.InspirationListFragment;
 import com.lcarino.bucketlist.ui.list.adapter.TabsViewPagerAdapter;
 
 import org.greenrobot.eventbus.EventBus;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.OnClick;
 
 public class BucketListActivity extends BaseActivity implements
@@ -28,6 +32,8 @@ public class BucketListActivity extends BaseActivity implements
     FireBaseDataBaseManager fireBaseDataBaseManager;
     @Inject
     EventBus eventBus;
+    @BindView(R.id.fab)
+    FloatingActionButton floatingActionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +48,28 @@ public class BucketListActivity extends BaseActivity implements
         FragmentPagerAdapter pagerAdapter = new TabsViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                if(position == 0 ) {
+                    floatingActionButton.show();
+                } else {
+                     floatingActionButton.hide();
+                }
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
 
     }
 
@@ -98,7 +126,8 @@ public class BucketListActivity extends BaseActivity implements
     }
 
     @OnClick(R.id.fab)
-    public void onClickAdd() {
+    public void onClickAdd(View view) {
+
         // TODO: check view pager and scroll if necessary.
         eventBus.post(new AddEvent());
 

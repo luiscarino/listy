@@ -1,4 +1,6 @@
-package com.lcarino.bucketlist.model;
+package com.lcarino.bucketlist.manager;
+
+import com.lcarino.bucketlist.model.Account;
 
 import rx.Subscriber;
 

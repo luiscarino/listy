@@ -4,7 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.lcarino.bucketlist.ui.list.InspirationListFragment;
+import com.lcarino.bucketlist.ui.detail.DetailFragment;
+import com.lcarino.bucketlist.ui.inspirations.InspirationListFragment;
 import com.lcarino.bucketlist.ui.list.MyListFragment;
 
 /**
@@ -15,8 +16,8 @@ import com.lcarino.bucketlist.ui.list.MyListFragment;
 
 public class TabsViewPagerAdapter extends FragmentPagerAdapter {
 
-    private final int PAGE_COUNT = 2;
-    private final String[] titles = {"My List","Inspiration"};
+    private final int PAGE_COUNT = 3;
+    private final String[] titles = {"My List","Inspiration", "Animations"};
 
     public TabsViewPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -24,10 +25,16 @@ public class TabsViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        if(position == 0) {
-            return MyListFragment.newInstance();
-        } else {
-            return InspirationListFragment.newInstance();
+        switch (position) {
+            case 0:
+                return MyListFragment.newInstance();
+            case 1:
+                return InspirationListFragment.newInstance();
+            case 2:
+                return DetailFragment.newInstance("");
+            default:
+                throw  new IllegalStateException();
+
         }
     }
 
