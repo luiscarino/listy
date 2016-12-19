@@ -1,9 +1,12 @@
 package com.lcarino.bucketlist.ui.add.adapter;
 
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.Query;
@@ -32,13 +35,26 @@ public class BucketListRecyclerAdapter extends FirebaseRecyclerAdapter<BucketLis
 
     public static class ListViewHolder extends RecyclerView.ViewHolder {
         private CheckBox checkBox;
+        private TextView title;
         public ListViewHolder(View v) {
             super(v);
             checkBox = (CheckBox) v.findViewById(R.id.bucketListCheckBox);
+            title = (TextView) v.findViewById(R.id.bucketListItemDetail);
+            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if(compoundButton.isChecked()) {
+                        Drawable drawable = compoundButton.getResources().getDrawable(R.drawable.ic_line);
+                        title.setBackgroundDrawable(drawable);
+                    } else {
+                        title.setBackgroundDrawable(null);
+                    }
+                }
+            });
         }
 
         void bind(BucketListItemViewModel model) {
-            checkBox.setText(model.title);
+            title.setText(model.title);
             checkBox.setTag(model.id);
             checkBox.setChecked(model.completed);
         }
