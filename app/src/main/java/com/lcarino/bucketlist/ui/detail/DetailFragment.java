@@ -4,16 +4,12 @@ import android.graphics.drawable.Animatable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.lcarino.bucketlist.R;
 import com.lcarino.bucketlist.common.BaseFragment;
-import com.lcarino.bucketlist.ui.list.model.ListItemModel;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * @author Luis Carino.
@@ -22,12 +18,12 @@ import butterknife.OnClick;
 public class DetailFragment extends BaseFragment<DetailView, DetailPresenter>  implements DetailView {
 
     public static final String ITEM_ID = "item_id";
-    @BindView(R.id.edit_title)
-    EditText editTextTitle;
-    @BindView(R.id.edit_description)
-    EditText editTextDescription;
-    @BindView(R.id.button_save)
-    Button buttonSave;
+//    @BindView(R.id.edit_title)
+//    EditText editTextTitle;
+//    @BindView(R.id.edit_description)
+//    EditText editTextDescription;
+//    @BindView(R.id.button_save)
+//    Button buttonSave;
     @BindView(R.id.imageView2)
     ImageView imageView;
 
@@ -81,17 +77,17 @@ public class DetailFragment extends BaseFragment<DetailView, DetailPresenter>  i
 
     @Override
     public void enableSaveButton() {
-        buttonSave.setEnabled(true);
+       // buttonSave.setEnabled(true);
     }
 
     @Override
     public void disableSaveButton() {
-        buttonSave.setEnabled(false);
+       // buttonSave.setEnabled(false);
     }
 
     @Override
     public void create() {
-        editTextTitle.getText();
+      //  editTextTitle.getText();
 
     }
 
@@ -117,18 +113,19 @@ public class DetailFragment extends BaseFragment<DetailView, DetailPresenter>  i
 
     }
 
-    @OnClick(R.id.button_save)
+    //@OnClick(R.id.button_save)
     public void onSaveClicked() {
         save();
     }
 
     @Override
     public void save() {
-        ListItemModel item = new ListItemModel.Builder()
-                .setId(1)
-                .setTitle(editTextTitle.getText().toString())
-                .setDescription(editTextDescription.getText().toString())
-                .build();
-        presenter.save(item);
+//        ListItemModel item = new ListItemModel.Builder()
+//                .setId(1)
+//                .setTitle(editTextTitle.getText().toString())
+//                .setDescription(editTextDescription.getText().toString())
+//                .build();
+//        presenter.save(item);
+//    }
     }
 }

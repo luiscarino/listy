@@ -56,7 +56,7 @@
             android:id="@+id/frameAdded"
             android:layout_width="0dp"
             android:layout_height="150dp"
-            android:background="@color/colorAccentAux"
+            android:background="@color/colorAccent"
             android:scaleType="centerCrop"
             android:visibility="gone"
             app:layout_constraintHorizontal_bias="1.0"
@@ -70,7 +70,7 @@
                 android:layout_height="64dp"
                 android:layout_gravity="center"
                 android:alpha="0"
-                android:src="@drawable/ic_check" />
+                android:src="@drawable/ic_checked" />
 
         </FrameLayout>
 

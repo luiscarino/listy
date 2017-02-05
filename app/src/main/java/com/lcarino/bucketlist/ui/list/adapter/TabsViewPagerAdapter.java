@@ -17,7 +17,7 @@ import com.lcarino.bucketlist.ui.list.MyListFragment;
 public class TabsViewPagerAdapter extends FragmentPagerAdapter {
 
     private final int PAGE_COUNT = 3;
-    private final String[] titles = {"My List","Inspiration", "Animations"};
+    private final String[] titles = {"My List","Inspiration", ""};
 
     public TabsViewPagerAdapter(FragmentManager fm) {
         super(fm);

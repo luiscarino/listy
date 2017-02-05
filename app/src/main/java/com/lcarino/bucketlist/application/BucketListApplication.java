@@ -2,9 +2,12 @@ package com.lcarino.bucketlist.application;
 
 import android.app.Application;
 
+import com.lcarino.bucketlist.R;
 import com.lcarino.bucketlist.di.ApplicationComponent;
 import com.lcarino.bucketlist.di.ApplicationModule;
 import com.lcarino.bucketlist.di.DaggerApplicationComponent;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
  * @author Luis Carino.
@@ -19,6 +22,7 @@ public class BucketListApplication extends Application {
     public void onCreate() {
         super.onCreate();
         injectDependencies();
+        initCalligraphy();
     }
 
     private void injectDependencies() {
@@ -33,5 +37,10 @@ public class BucketListApplication extends Application {
         return applicationComponent;
     }
 
-
+    public void initCalligraphy() {
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/GeosansLight.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .build());
+    }
 }

@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2292a7</color>
-    <color name="colorPrimaryDark">#186776</color>
-    <color name="colorPrimaryLight">#31c8e4</color>
-    <color name="colorAccent">#92a722</color>
-    <color name="colorAccentAux">#a72292</color>
+    <!--<color name="colorPrimary">#2292a7</color>-->
+    <!--<color name="colorPrimaryDark">#186776</color>-->
+    <!--<color name="colorPrimaryLight">#31c8e4</color>-->
+    <!--<color name="colorAccent">#92a722</color>-->
+    <!--<color name="colorAccentAux">#a72292</color>-->
+
+    <!--<color name="colorPrimary">#1BB0F4</color>-->
+    <!--<color name="colorPrimaryDark">#2983CE</color>-->
+    <!--<color name="colorPrimaryLight">#31c8e4</color>-->
+    <!--<color name="colorAccent">#F2D76C </color>-->
+    <!--<color name="colorAccentAux">#a72292</color>-->
+
+    <color name="colorPrimary">#FFF</color>
+    <color name="colorPrimaryDark">#C2C2C2</color>
+    <color name="colorPrimaryLight">#666B6A</color>
+    <color name="colorAccent">#50D2C2 </color>
 
     <color name="text">#FFFFFF</color>
     <color name="primaryText">#212121</color>
+    <color name="input_new_item">#30847a</color>
 </resources>

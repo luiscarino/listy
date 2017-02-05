@@ -1,4 +1,4 @@
-package com.lcarino.bucketlist.ui.add.adapter;
+package com.lcarino.bucketlist.ui.list.adapter;
 
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
@@ -14,10 +14,12 @@ import com.lcarino.bucketlist.R;
 import com.lcarino.bucketlist.model.ui.BucketListItemViewModel;
 
 /**
- * Created by luiscarino on 11/18/16.
+ * Recycler View Adapter to bind data in {@link com.lcarino.bucketlist.ui.add.AddDialogFragment}
+ *
+ * @author luiscarino.
  */
 
-public class BucketListRecyclerAdapter extends FirebaseRecyclerAdapter<BucketListItemViewModel, BucketListRecyclerAdapter.ListViewHolder> {
+public class BucketListRecyclerAdapter extends FirebaseRecyclerAdapter<BucketListItemViewModel, BucketListRecyclerAdapter.ListViewHolder> implements ItemTouchHelperAdapter {
 
     public BucketListRecyclerAdapter(Class<BucketListItemViewModel> modelClass, int modelLayout, Class<ListViewHolder> viewHolderClass, Query ref) {
         super(modelClass, modelLayout, viewHolderClass, ref);
@@ -25,7 +27,7 @@ public class BucketListRecyclerAdapter extends FirebaseRecyclerAdapter<BucketLis
 
     @Override
     public ListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-       return super.onCreateViewHolder(parent, viewType);
+        return super.onCreateViewHolder(parent, viewType);
     }
 
     @Override
@@ -36,6 +38,7 @@ public class BucketListRecyclerAdapter extends FirebaseRecyclerAdapter<BucketLis
     public static class ListViewHolder extends RecyclerView.ViewHolder {
         private CheckBox checkBox;
         private TextView title;
+
         public ListViewHolder(View v) {
             super(v);
             checkBox = (CheckBox) v.findViewById(R.id.bucketListCheckBox);
@@ -43,7 +46,7 @@ public class BucketListRecyclerAdapter extends FirebaseRecyclerAdapter<BucketLis
             checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    if(compoundButton.isChecked()) {
+                    if (compoundButton.isChecked()) {
                         Drawable drawable = compoundButton.getResources().getDrawable(R.drawable.ic_line);
                         title.setBackgroundDrawable(drawable);
                     } else {
@@ -60,4 +63,13 @@ public class BucketListRecyclerAdapter extends FirebaseRecyclerAdapter<BucketLis
         }
     }
 
+    @Override
+    public void onItemMove(int fromPosition, int toPosition) {
+
+    }
+
+    @Override
+    public void onItemDismiss(int position) {
+        getRef(position).removeValue();
+    }
 }
