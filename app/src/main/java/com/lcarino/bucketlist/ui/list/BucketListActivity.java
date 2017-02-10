@@ -53,7 +53,6 @@ public class BucketListActivity extends AppCompatActivity implements
     getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.fragment_container, MyListFragment.newInstance())
-                .addToBackStack(null)
                 .commit();
     }
 

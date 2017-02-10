@@ -11,8 +11,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.lcarino.bucketlist.R;
 import com.lcarino.bucketlist.common.BaseFragment;
-import com.lcarino.bucketlist.ui.list.ListView;
 import com.lcarino.bucketlist.ui.inspirations.adapter.InspirationsListRecyclerAdapter;
+import com.lcarino.bucketlist.ui.list.ListView;
 import com.lcarino.bucketlist.ui.list.model.Inspiration;
 
 import java.util.List;
@@ -24,7 +24,7 @@ import butterknife.BindView;
  *
  * @author luis.carino
  */
-public class InspirationListFragment extends BaseFragment<ListView, InspirationsListPresenter> implements ListView, InspirationsListRecyclerAdapter.MessageViewHolder.ListActions {
+public class InspirationListFragment extends BaseFragment<ListView, ListFragmentPresenter> implements ListView, InspirationsListRecyclerAdapter.MessageViewHolder.ListActions {
 
     private Listener bucketActivityActions;
     private InspirationsListRecyclerAdapter adapter;
@@ -51,7 +51,7 @@ public class InspirationListFragment extends BaseFragment<ListView, Inspirations
     }
 
     @Override
-    public InspirationsListPresenter createPresenter() {
+    public ListFragmentPresenter createPresenter() {
         return activityActions.getListComponent().getListPresenter();
     }
 
@@ -107,7 +107,7 @@ public class InspirationListFragment extends BaseFragment<ListView, Inspirations
     }
 
     @Override
-    public void showAddItem() {
+    public void clearInputField() {
 
     }
 
@@ -116,7 +116,10 @@ public class InspirationListFragment extends BaseFragment<ListView, Inspirations
 
         adapter.getRef(id).removeValue();
        // Animator animator = AnimatorInflater.loadAnimator(getContext(), R.anim.rotate);
+    }
 
+    @Override
+    public void scrollToBottom() {
 
     }
 }

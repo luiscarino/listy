@@ -13,11 +13,13 @@
     <!--<color name="colorAccentAux">#a72292</color>-->
 
     <color name="colorPrimary">#FFF</color>
-    <color name="colorPrimaryDark">#C2C2C2</color>
-    <color name="colorPrimaryLight">#666B6A</color>
-    <color name="colorAccent">#50D2C2 </color>
+    <color name="colorPrimaryDark">#ADB6B5</color>
+    <color name="colorPrimaryLight">#212212</color>
+    <color name="colorAccent">#21BEDE </color>
+    <color name="colorAccentAux">#8CC739 </color>
 
     <color name="text">#FFFFFF</color>
-    <color name="primaryText">#212121</color>
+    <color name="primaryText">#1D1D26</color>
+    <color name="secondaryText">#707070</color>
     <color name="input_new_item">#30847a</color>
 </resources>

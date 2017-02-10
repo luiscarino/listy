@@ -3,6 +3,7 @@ package com.lcarino.bucketlist.ui.inspirations;
 import com.lcarino.bucketlist.manager.FireBaseDataBaseManager;
 import com.lcarino.bucketlist.mvp.MvpBasePresenter;
 import com.lcarino.bucketlist.ui.list.ListView;
+import com.lcarino.bucketlist.ui.list.model.Entry;
 import com.lcarino.bucketlist.ui.list.model.Inspiration;
 import com.lcarino.bucketlist.ui.list.model.ListItemModel;
 
@@ -17,13 +18,13 @@ import javax.inject.Inject;
  * @author Luis Carino.
  */
 
-public class  InspirationsListPresenter extends MvpBasePresenter<ListView> {
+public class ListFragmentPresenter extends MvpBasePresenter<ListView> {
 
     private final FireBaseDataBaseManager fireBaseDataBaseManager;
     private final EventBus eventBus;
 
     @Inject
-    public InspirationsListPresenter(EventBus eventBus, FireBaseDataBaseManager fireBaseDataBaseManager) {
+    public ListFragmentPresenter(EventBus eventBus, FireBaseDataBaseManager fireBaseDataBaseManager) {
         this.eventBus = eventBus;
         this.fireBaseDataBaseManager = fireBaseDataBaseManager;
         this.eventBus.register(this);
@@ -31,9 +32,9 @@ public class  InspirationsListPresenter extends MvpBasePresenter<ListView> {
 
 
     public void addItem(ListItemModel item) {
-        if (isViewAttached()) {
-            view.showAddItem();
-        }
+        fireBaseDataBaseManager.insertEntry(new Entry(false, item.imageUrl, null, item.title));
+        getView().clearInputField();
+        getView().scrollToBottom();
     }
 
 

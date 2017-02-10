@@ -17,6 +17,8 @@ public interface ListView extends MvpView {
 
     void displayListItems(List<Inspiration> items);
 
-    void showAddItem();
+    void clearInputField();
+
+    void scrollToBottom();
 
 }

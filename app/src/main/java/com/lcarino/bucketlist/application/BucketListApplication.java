@@ -7,6 +7,7 @@ import com.lcarino.bucketlist.di.ApplicationComponent;
 import com.lcarino.bucketlist.di.ApplicationModule;
 import com.lcarino.bucketlist.di.DaggerApplicationComponent;
 
+import io.realm.Realm;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
@@ -23,6 +24,7 @@ public class BucketListApplication extends Application {
         super.onCreate();
         injectDependencies();
         initCalligraphy();
+        initReal();
     }
 
     private void injectDependencies() {
@@ -42,5 +44,9 @@ public class BucketListApplication extends Application {
                 .setDefaultFontPath("fonts/GeosansLight.ttf")
                 .setFontAttrId(R.attr.fontPath)
                 .build());
+    }
+
+    private void initReal(){
+        Realm.init(this);
     }
 }

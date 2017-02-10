@@ -10,7 +10,7 @@ public class InspirationsListPresenterTest {
 //    private ListView listView;
 //    @Mock
 //    private ListManager listManager;
-//    private InspirationsListPresenter inspirationsListPresenter;
+//    private ListFragmentPresenter inspirationsListPresenter;
 //
 //    private final String title = "Title";
 //
@@ -21,7 +21,7 @@ public class InspirationsListPresenterTest {
 //    @Before
 //    public void init() {
 //        MockitoAnnotations.initMocks(this);
-//        inspirationsListPresenter = new InspirationsListPresenter(listManager);
+//        inspirationsListPresenter = new ListFragmentPresenter(listManager);
 //        inspirationsListPresenter.attachView(listView);
 //    }
 //

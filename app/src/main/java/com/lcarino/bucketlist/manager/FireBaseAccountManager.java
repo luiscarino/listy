@@ -12,11 +12,8 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.lcarino.bucketlist.model.Account;
 
 import javax.inject.Inject;
-
-import rx.Subscriber;
 
 /**
  * @author Luis Carino.
@@ -43,11 +40,6 @@ public class FireBaseAccountManager implements AccountManager, GoogleApiClient.O
         firebaseAuth
                 .signInWithCredential(credential)
                 .addOnCompleteListener(listener);
-    }
-
-    @Override
-    public Subscriber<Account> doLogin() {
-        return null;
     }
 
     @Override
