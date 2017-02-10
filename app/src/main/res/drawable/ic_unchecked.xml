@@ -1,6 +1,6 @@
 <vector android:height="24dp" android:viewportHeight="139.0"
     android:viewportWidth="142.0" android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
-    <path android:fillColor="@color/colorPrimaryDark"
+    <path android:fillColor="@color/colorPrimaryLight"
         android:pathData="M0,0h142v139h-142z"
         android:strokeColor="@color/colorPrimaryDark" android:strokeWidth="1"/>
 </vector>

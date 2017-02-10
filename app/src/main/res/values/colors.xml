@@ -13,9 +13,9 @@
     <!--<color name="colorAccentAux">#a72292</color>-->
 
     <color name="colorPrimary">#FFF</color>
-    <color name="colorPrimaryDark">#ADB6B5</color>
-    <color name="colorPrimaryLight">#212212</color>
-    <color name="colorAccent">#21BEDE </color>
+    <color name="colorPrimaryDark">#37474F</color>
+    <color name="colorPrimaryLight">#B0BEC5</color>
+    <color name="colorAccent">#40C4FF </color>
     <color name="colorAccentAux">#8CC739 </color>
 
     <color name="text">#FFFFFF</color>
