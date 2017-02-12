@@ -22,4 +22,6 @@
     <color name="primaryText">#1D1D26</color>
     <color name="secondaryText">#707070</color>
     <color name="input_new_item">#30847a</color>
+
+    <color name="red">#C62828</color>
 </resources>

@@ -6,6 +6,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.lcarino.bucketlist.manager.FireBaseDataBaseManager;
 import com.lcarino.bucketlist.model.ui.BucketListItemViewModel;
 import com.lcarino.bucketlist.ui.inspirations.ListFragmentPresenter;
 import com.lcarino.bucketlist.ui.list.adapter.BucketListRecyclerAdapter;
+import com.lcarino.bucketlist.ui.list.adapter.ItemTouchHelperCallback;
 import com.lcarino.bucketlist.ui.list.di.ListComponent;
 import com.lcarino.bucketlist.ui.list.di.ListModule;
 import com.lcarino.bucketlist.ui.list.model.Inspiration;
@@ -100,6 +102,11 @@ public class MyListFragment extends BaseFragment<ListView, ListFragmentPresenter
                 return false;
             }
         });
+
+        ItemTouchHelperCallback itemTouchHelperCallback = new ItemTouchHelperCallback(adapter, getContext());
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchHelperCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+
     }
 
 
