@@ -40,7 +40,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintVertical_bias="0.0"
         app:rrvIsRefreshable="false"
-        app:rrvSwipeToDelete="true"
+        app:rrvSwipeToDelete="false"
         app:rrvEmptyLayoutId="@layout/empty_list_view"
         app:rrvLayoutType="LinearLayout"/>
 </android.support.constraint.ConstraintLayout>

@@ -20,12 +20,8 @@ import io.realm.RealmViewHolder
 class RealmListRecyclerViewAdapter(
         context: Context,
         realmResults: RealmResults<ListEntry>,
-        itemActions: ListItemActions) : RealmBasedRecyclerViewAdapter<ListEntry, RealmListRecyclerViewAdapter.ListViewHolder>
-                                                                                                            (context, realmResults, true, true) {
-    val actions : ListItemActions
-    init {
-        actions = itemActions
-    }
+        itemActions: ListItemActions) : RealmBasedRecyclerViewAdapter<ListEntry, RealmListRecyclerViewAdapter.ListViewHolder>(context, realmResults, true, true) {
+    val actions: ListItemActions = itemActions
 
     override fun onCreateRealmViewHolder(viewGroup: ViewGroup, i: Int): ListViewHolder {
         val view = inflater.inflate(R.layout.bucket_list_item, viewGroup, false)
@@ -37,14 +33,12 @@ class RealmListRecyclerViewAdapter(
     }
 
     class ListViewHolder(v: View, listener: ListItemActions) : RealmViewHolder(v) {
-         val checkBox: CheckBox
-         val title: EditText
+        val checkBox: CheckBox = v.findViewById(R.id.bucketListCheckBox) as CheckBox
+        val title: EditText = v.findViewById(R.id.bucketListItemDetail) as EditText
 
         init {
-            checkBox = v.findViewById(R.id.bucketListCheckBox) as CheckBox
-            title = v.findViewById(R.id.bucketListItemDetail) as EditText
             checkBox.setOnCheckedChangeListener { compoundButton, b ->
-                if (compoundButton.isChecked) {
+                if (checkBox.isChecked) {
                     val drawable = compoundButton.resources.getDrawable(R.drawable.ic_line)
                     title.setBackgroundDrawable(drawable)
                 } else {
@@ -73,7 +67,7 @@ class RealmListRecyclerViewAdapter(
         }
     }
 
-    interface ListItemActions{
-        fun onEditItem(id: String, newValue : String)
+    interface ListItemActions {
+        fun onEditItem(id: String, newValue: String)
     }
 }
