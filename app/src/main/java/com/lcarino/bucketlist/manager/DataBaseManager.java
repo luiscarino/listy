@@ -28,6 +28,6 @@ public interface DataBaseManager {
 
     void remove(ListEntry listEntry);
 
-    void update(ListEntry listEntry);
+    void update(String id, String newValue);
 
 }

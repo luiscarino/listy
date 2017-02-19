@@ -16,6 +16,8 @@ import com.lcarino.bucketlist.ui.inspirations.adapter.InspirationsListRecyclerAd
 import com.lcarino.bucketlist.ui.list.ListView;
 import com.lcarino.bucketlist.ui.list.model.Inspiration;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -39,11 +41,19 @@ public class InspirationListFragment extends BaseFragment<ListView, ListFragment
         return  new InspirationListFragment();
     }
 
+    @Override
+    public void displayListItems(@NotNull List<? extends Inspiration> items) {
+
+    }
+
+    @Override
+    public void displayList(@NotNull List<? extends BucketListItemViewModel> items) {
+
+    }
+
+
     public interface Listener {
-        void navigateToDetailScreen(String itemId);
-
         void setToolbarTitle(String title);
-
     }
 
     @Override
@@ -102,10 +112,6 @@ public class InspirationListFragment extends BaseFragment<ListView, ListFragment
 
     }
 
-    @Override
-    public void displayListItems(List<Inspiration> items) {
-
-    }
 
     @Override
     public void clearInputField() {
@@ -124,8 +130,4 @@ public class InspirationListFragment extends BaseFragment<ListView, ListFragment
 
     }
 
-    @Override
-    public void displayList(List<BucketListItemViewModel> items) {
-
-    }
 }

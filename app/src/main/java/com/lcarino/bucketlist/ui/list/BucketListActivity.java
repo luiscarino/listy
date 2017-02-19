@@ -57,13 +57,8 @@ public class BucketListActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void navigateToDetailScreen(String itemId) {
-
-    }
-
-    @Override
     public void setToolbarTitle(String title) {
-
+        // implement me
     }
 
     @Override

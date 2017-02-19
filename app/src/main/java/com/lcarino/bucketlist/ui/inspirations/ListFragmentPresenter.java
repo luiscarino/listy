@@ -101,6 +101,10 @@ public class ListFragmentPresenter extends MvpBasePresenter<ListView> {
         return realmManagerDataBaseManager.getListEntries();
     }
 
+    public void updateListItem(String id, String newValue) {
+        realmManagerDataBaseManager.update(id, newValue);
+    }
+
 
 
 }

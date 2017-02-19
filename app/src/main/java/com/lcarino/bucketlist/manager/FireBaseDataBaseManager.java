@@ -145,7 +145,7 @@ public class FireBaseDataBaseManager  implements DataBaseManager {
     }
 
     @Override
-    public void update(ListEntry listEntry) {
+    public void update(String id, String newValue) {
 
     }
 

@@ -72,7 +72,13 @@ public class RealmManagerDataBaseManager implements DataBaseManager {
     }
 
     @Override
-    public void update(ListEntry listEntry) {
-
+    public void update(final String id, final String newValue) {
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                ListEntry listEntry = realm.where(ListEntry.class).equalTo("id", id).findFirst();
+                listEntry.setTitle(newValue);
+            }
+        });
     }
 }

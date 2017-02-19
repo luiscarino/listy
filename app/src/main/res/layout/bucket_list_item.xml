@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
+    <EditText
         android:id="@+id/bucketListItemDetail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -38,6 +38,7 @@
         tools:text="Sample task to do!"
         android:layout_marginRight="16dp"
         app:layout_constraintRight_toRightOf="parent"
+        android:inputType="textCapSentences"
         android:layout_marginEnd="16dp" />
 
 </android.support.constraint.ConstraintLayout>

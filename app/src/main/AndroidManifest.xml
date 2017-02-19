@@ -17,7 +17,7 @@
         <activity
             android:name=".ui.list.BucketListActivity"
             android:label="@string/title_activity_login"
-            android:windowSoftInputMode="adjustPan"
+            android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

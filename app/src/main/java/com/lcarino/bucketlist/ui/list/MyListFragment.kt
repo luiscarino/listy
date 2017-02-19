@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.fragment_layout_bucket_list.*
  * @author Luis Carino.
  */
 
-class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView {
+class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView, RealmListRecyclerViewAdapter.ListItemActions{
 
     var recyclerView: RealmRecyclerView ?= null
     var adapter: RealmListRecyclerViewAdapter ?= null
@@ -54,7 +54,7 @@ class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView
     }
 
     private fun setUpRecyclerView() {
-        adapter = RealmListRecyclerViewAdapter(context, presenter.listItems)
+        adapter = RealmListRecyclerViewAdapter(context, presenter.listItems, this)
         recyclerViewBucketList.setAdapter(adapter)
     }
 
@@ -91,6 +91,10 @@ class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView
 
     override fun displayList(items: List<BucketListItemViewModel>) {
 
+    }
+
+    override fun onEditItem(id: String, newValue: String) {
+        presenter.updateListItem(id, newValue)
     }
 
     companion object {
