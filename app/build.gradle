@@ -6,7 +6,7 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '25.0.2'
     defaultConfig {
         applicationId "com.lcarino.bucketlist"
         minSdkVersion 21
@@ -29,47 +29,55 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
+    // android
+    compile 'com.android.support:support-v4:25.1.1'
+    compile 'com.android.support:recyclerview-v7:25.1.1'
+    compile 'com.android.support:appcompat-v7:25.1.1'
+    compile 'com.android.support:design:25.1.1'
+    compile 'com.android.support:cardview-v7:25.1.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
+
+    //kotlin
+    compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.4"
+
     // Because RxAndroid releases are few and far between, it is recommended you also
     // explicitly depend on RxJava's latest version for bug fixes and new features.
-    
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'io.reactivex:rxjava:1.1.6'
 
     // Dagger dependencies
+    compile 'com.google.dagger:dagger:2.7'
+    apt 'com.google.dagger:dagger-compiler:2.7'
     
     // Butterknife
-    
-    //Glide
-    
+    compile 'com.jakewharton:butterknife:8.4.0'
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
 
+    // caligraphy
+    compile 'uk.co.chrisjenx:calligraphy:2.2.0'
 
-    
+    // event bus
+    compile 'org.greenrobot:eventbus:3.0.0'
+
+    // realm
+    compile 'com.github.thorbenprimke:realm-recyclerview:0.9.25'
+
+    // guava
+    compile 'com.google.guava:guava:20.0'
+
+    // firebase
+    compile 'com.google.android.gms:play-services-auth:10.0.1'
+    compile 'com.google.firebase:firebase-auth:10.0.1'
+    compile 'com.google.firebase:firebase-database:10.0.1'
+    compile 'com.firebaseui:firebase-ui-database:0.4.0'
+
     // Dependencies for local unit tests
     testCompile "junit:junit:$rootProject.ext.junitVersion"
     testCompile "org.mockito:mockito-all:$rootProject.ext.mockitoVersion"
     testCompile "org.hamcrest:hamcrest-all:$rootProject.ext.hamcrestVersion"
     testCompile "org.powermock:powermock-module-junit4:$rootProject.ext.powerMockito"
     testCompile "org.powermock:powermock-api-mockito:$rootProject.ext.powerMockito"
-    compile 'com.android.support:appcompat-v7:25.1.0'
-    compile 'com.android.support:design:25.1.0'
-    compile 'com.android.support:percent:25.1.0'
-    compile 'com.google.android.gms:play-services-auth:10.0.1'
-    compile 'com.google.firebase:firebase-auth:10.0.1'
-    compile 'com.google.firebase:firebase-database:10.0.1'
-    compile 'com.firebaseui:firebase-ui-database:0.4.0'
-    compile 'org.greenrobot:eventbus:3.0.0'
-    compile 'io.reactivex:rxandroid:1.2.1'
-    compile 'io.reactivex:rxjava:1.1.6'
-    compile 'com.google.dagger:dagger:2.7'
-    compile 'com.jakewharton:butterknife:8.4.0'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'com.android.support:support-v4:25.1.0'
-    compile 'com.android.support:cardview-v7:25.1.0'
     testCompile 'junit:junit:4.12'
-    apt 'com.google.dagger:dagger-compiler:2.7'
-    apt 'com.jakewharton:butterknife-compiler:8.4.0'
-    compile 'com.android.support:recyclerview-v7:25.1.0'
-    compile 'uk.co.chrisjenx:calligraphy:2.2.0'
-    compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.4"
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
 }
 
 apply plugin: 'com.google.gms.google-services'

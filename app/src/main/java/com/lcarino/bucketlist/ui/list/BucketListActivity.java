@@ -52,7 +52,7 @@ public class BucketListActivity extends AppCompatActivity implements
     public void showList() {
     getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.fragment_container, MyListFragment.newInstance())
+                .add(R.id.fragment_container, MyListFragment.Companion.newInstance())
                 .commit();
     }
 

@@ -11,6 +11,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.lcarino.bucketlist.R;
 import com.lcarino.bucketlist.common.BaseFragment;
+import com.lcarino.bucketlist.model.ui.BucketListItemViewModel;
 import com.lcarino.bucketlist.ui.inspirations.adapter.InspirationsListRecyclerAdapter;
 import com.lcarino.bucketlist.ui.list.ListView;
 import com.lcarino.bucketlist.ui.list.model.Inspiration;
@@ -120,6 +121,11 @@ public class InspirationListFragment extends BaseFragment<ListView, ListFragment
 
     @Override
     public void scrollToBottom() {
+
+    }
+
+    @Override
+    public void displayList(List<BucketListItemViewModel> items) {
 
     }
 }

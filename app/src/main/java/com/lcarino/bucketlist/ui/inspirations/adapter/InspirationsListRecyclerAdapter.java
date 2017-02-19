@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.Query;
 import com.lcarino.bucketlist.R;
@@ -132,7 +131,7 @@ public class InspirationsListRecyclerAdapter extends FirebaseRecyclerAdapter<Ins
 
             cardView.setTag(postion);
             textView.setText(listItemModel.title);
-            Glide.with(imageView.getContext()).load(listItemModel.imageURL).into(imageView);
+          //  Glide.with(imageView.getContext()).load(listItemModel.imageURL).into(imageView);
         }
 
         public interface ListActions {

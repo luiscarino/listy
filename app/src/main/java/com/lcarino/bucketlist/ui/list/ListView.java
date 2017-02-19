@@ -1,5 +1,6 @@
 package com.lcarino.bucketlist.ui.list;
 
+import com.lcarino.bucketlist.model.ui.BucketListItemViewModel;
 import com.lcarino.bucketlist.mvp.MvpView;
 import com.lcarino.bucketlist.ui.list.model.Inspiration;
 
@@ -20,5 +21,7 @@ public interface ListView extends MvpView {
     void clearInputField();
 
     void scrollToBottom();
+
+    void displayList(List<BucketListItemViewModel> items);
 
 }

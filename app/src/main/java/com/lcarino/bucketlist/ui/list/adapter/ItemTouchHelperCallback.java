@@ -10,12 +10,14 @@ import android.view.View;
 
 import com.lcarino.bucketlist.R;
 
+import co.moonmonkeylabs.realmrecyclerview.RealmSimpleItemTouchHelperCallback;
+
 /**
  * Simple item touch helper callback to use with {@link RecyclerView}
  * Created by luiscarino on 1/11/17.
  */
 
-public class ItemTouchHelperCallback extends ItemTouchHelper.Callback {
+public class ItemTouchHelperCallback extends RealmSimpleItemTouchHelperCallback {
 
     private final ItemTouchHelperAdapter adapter;
     private Drawable background;

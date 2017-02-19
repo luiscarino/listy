@@ -10,6 +10,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import io.realm.Realm;
 
 /**
  * @author Luis Carino.
@@ -41,4 +42,9 @@ public class ApplicationModule {
         return EventBus.getDefault();
     }
 
+    @Singleton
+    @Provides
+    Realm provideReal() {
+        return Realm.getDefaultInstance();
+    }
 }

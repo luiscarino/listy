@@ -27,7 +27,7 @@ public class TabsViewPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return MyListFragment.newInstance();
+                return MyListFragment.Companion.newInstance();
             case 1:
                 return InspirationListFragment.newInstance();
             case 2:

@@ -13,8 +13,6 @@ import com.lcarino.bucketlist.mvp.MvpPresenter;
 import com.lcarino.bucketlist.mvp.MvpView;
 import com.lcarino.bucketlist.ui.list.di.ListComponent;
 
-import butterknife.ButterKnife;
-
 /**
  * Base fragment that uses MVP.
  *
@@ -54,9 +52,9 @@ public abstract class BaseFragment<V extends MvpView, P extends MvpPresenter<V>>
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(getLayoutRes(), container, false);
-        ButterKnife.bind(this, view);
-        return view;
+        return inflater.inflate(getLayoutRes(), container, false);
+//        ButterKnife.bind(this, view);
+//        return view;
     }
 
     @LayoutRes

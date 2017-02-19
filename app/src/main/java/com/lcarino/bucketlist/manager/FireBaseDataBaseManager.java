@@ -9,14 +9,19 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.lcarino.bucketlist.event.ResultEvent;
+import com.lcarino.bucketlist.model.ListEntry;
 import com.lcarino.bucketlist.ui.list.model.Entry;
 import com.lcarino.bucketlist.ui.list.model.Inspiration;
+import com.lcarino.bucketlist.model.List;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 
 import javax.inject.Inject;
+
+import io.realm.RealmList;
+import io.realm.RealmResults;
 
 /**
  * A simple manager to handle transactions with Fire Base DB.
@@ -40,7 +45,7 @@ public class FireBaseDataBaseManager  implements DataBaseManager {
         this.databaseReference = databaseReference;
     }
 
-    @Override
+
     public void fetchInspirations() {
         databaseReference.child(INSPIRATIONS).addListenerForSingleValueEvent(new ValueEventListener() {
             ArrayList<Inspiration> inspirationList = new ArrayList<>();
@@ -67,8 +72,8 @@ public class FireBaseDataBaseManager  implements DataBaseManager {
         eventBus.post(inspirationsResultEvent);
     }
 
-    @Override
-    public void fetchLists() {
+
+    public void fetchList(String listId) {
         databaseReference.child(LISTS).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -86,6 +91,24 @@ public class FireBaseDataBaseManager  implements DataBaseManager {
     }
 
     @Override
+    public void addList(List list) {
+
+    }
+
+    @Override
+    public void removeList(List list) {
+
+    }
+
+    @Override
+    public RealmList<List> fetchLists() {
+        return null;
+    }
+
+
+
+
+
     public void fetchListEntries() {
         databaseReference.child(LIST_ENTRIES).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -111,6 +134,21 @@ public class FireBaseDataBaseManager  implements DataBaseManager {
         });
     }
 
+    @Override
+    public void add(ListEntry listEntry) {
+
+    }
+
+    @Override
+    public void remove(ListEntry listEntry) {
+
+    }
+
+    @Override
+    public void update(ListEntry listEntry) {
+
+    }
+
     public static class InspirationsResultEvent  extends ResultEvent<ArrayList<Inspiration>>{
 
         public InspirationsResultEvent() {
@@ -126,6 +164,11 @@ public class FireBaseDataBaseManager  implements DataBaseManager {
         public AddResultEvent(Boolean payload) {
             super(payload);
         }
+    }
+
+    @Override
+    public RealmResults<ListEntry> getListEntries() {
+        return null;
     }
 }
 

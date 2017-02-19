@@ -12,7 +12,7 @@
         android:id="@+id/newListItemEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp"
+        android:layout_marginBottom="1dp"
         android:background="@color/colorAccent"
         android:drawablePadding="10dp"
         android:drawableStart="@drawable/ic_add_white_18dp"
@@ -20,7 +20,7 @@
         android:ems="10"
         android:fontFamily="sans-serif"
         android:hint="@string/add_an_item_edit_text_hint"
-        android:inputType="textPersonName"
+        android:inputType="textCapSentences"
         android:padding="16dp"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -28,7 +28,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
-    <android.support.v7.widget.RecyclerView
+    <co.moonmonkeylabs.realmrecyclerview.RealmRecyclerView
         android:id="@+id/recyclerViewBucketList"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -38,5 +38,9 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        app:rrvIsRefreshable="false"
+        app:rrvSwipeToDelete="true"
+        app:rrvEmptyLayoutId="@layout/empty_list_view"
+        app:rrvLayoutType="LinearLayout"/>
 </android.support.constraint.ConstraintLayout>
