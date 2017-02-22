@@ -12,7 +12,6 @@ import com.lcarino.bucketlist.event.ResultEvent;
 import com.lcarino.bucketlist.model.ListEntry;
 import com.lcarino.bucketlist.ui.list.model.Entry;
 import com.lcarino.bucketlist.ui.list.model.Inspiration;
-import com.lcarino.bucketlist.model.List;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -20,7 +19,6 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-import io.realm.RealmList;
 import io.realm.RealmResults;
 
 /**
@@ -44,8 +42,7 @@ public class FireBaseDataBaseManager  implements DataBaseManager {
         this.eventBus = eventBus;
         this.databaseReference = databaseReference;
     }
-
-
+    
     public void fetchInspirations() {
         databaseReference.child(INSPIRATIONS).addListenerForSingleValueEvent(new ValueEventListener() {
             ArrayList<Inspiration> inspirationList = new ArrayList<>();
@@ -90,25 +87,6 @@ public class FireBaseDataBaseManager  implements DataBaseManager {
 
     }
 
-    @Override
-    public void addList(List list) {
-
-    }
-
-    @Override
-    public void removeList(List list) {
-
-    }
-
-    @Override
-    public RealmList<List> fetchLists() {
-        return null;
-    }
-
-
-
-
-
     public void fetchListEntries() {
         databaseReference.child(LIST_ENTRIES).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -140,7 +118,7 @@ public class FireBaseDataBaseManager  implements DataBaseManager {
     }
 
     @Override
-    public void remove(ListEntry listEntry) {
+    public void delete(String id) {
 
     }
 

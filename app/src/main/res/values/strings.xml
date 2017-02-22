@@ -24,4 +24,6 @@
     <string name="button_add_text">Add</string>
     <string name="add_an_item_edit_text_hint">Add new item</string>
     <string name="add_button">Add</string>
+    <string name="snack_item_deleted_msg">Item deleted</string>
+    <string name="snack_undo_delete">UNDO</string>
 </resources>

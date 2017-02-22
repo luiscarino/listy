@@ -42,11 +42,6 @@ public class InspirationListFragment extends BaseFragment<ListView, ListFragment
     }
 
     @Override
-    public void displayListItems(@NotNull List<? extends Inspiration> items) {
-
-    }
-
-    @Override
     public void displayList(@NotNull List<? extends BucketListItemViewModel> items) {
 
     }
@@ -100,17 +95,6 @@ public class InspirationListFragment extends BaseFragment<ListView, ListFragment
         recyclerView.setAdapter(adapter);
     }
 
-
-
-    @Override
-    public void showProgress() {
-
-    }
-
-    @Override
-    public void hideProgress() {
-
-    }
 
 
     @Override

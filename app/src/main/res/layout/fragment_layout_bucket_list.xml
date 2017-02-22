@@ -29,7 +29,7 @@
         app:layout_constraintRight_toRightOf="parent" />
 
     <co.moonmonkeylabs.realmrecyclerview.RealmRecyclerView
-        android:id="@+id/recyclerViewBucketList"
+        android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@android:color/white"

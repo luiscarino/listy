@@ -4,16 +4,22 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 /**
+ * Represents a list entry in Realm
  * Created by luiscarino on 2/11/17.
  */
 public class ListEntry extends RealmObject {
 
-    @PrimaryKey private String id;
+    @PrimaryKey
+    private String id;
     private boolean checked;
     private String title;
     private String description;
     private String timestamp;
     private Category category;
+    private boolean deleted;
+
+    public ListEntry() {
+    }
 
     public String getId() {
         return id;
@@ -61,5 +67,13 @@ public class ListEntry extends RealmObject {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

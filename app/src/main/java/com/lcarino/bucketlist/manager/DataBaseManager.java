@@ -1,11 +1,9 @@
 package com.lcarino.bucketlist.manager;
 
 
-import com.lcarino.bucketlist.model.List;
 import com.lcarino.bucketlist.model.ListEntry;
 import com.lcarino.bucketlist.ui.list.model.Entry;
 
-import io.realm.RealmList;
 import io.realm.RealmResults;
 
 /**
@@ -14,11 +12,6 @@ import io.realm.RealmResults;
 
 public interface DataBaseManager {
 
-    void addList(List list);
-
-    void removeList(List list);
-
-    RealmList<List> fetchLists();
 
     RealmResults<ListEntry> getListEntries();
 
@@ -26,7 +19,7 @@ public interface DataBaseManager {
 
     void add(com.lcarino.bucketlist.model.ListEntry listEntry);
 
-    void remove(ListEntry listEntry);
+    void delete(String id);
 
     void update(String id, String newValue);
 

@@ -1,12 +1,12 @@
 package com.lcarino.bucketlist.ui.list
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import co.moonmonkeylabs.realmrecyclerview.RealmRecyclerView
 import com.lcarino.bucketlist.R
 import com.lcarino.bucketlist.application.BucketListApplication
 import com.lcarino.bucketlist.common.BaseFragment
@@ -15,7 +15,6 @@ import com.lcarino.bucketlist.ui.inspirations.ListFragmentPresenter
 import com.lcarino.bucketlist.ui.list.adapter.DragRealItemTouchHelperCallback
 import com.lcarino.bucketlist.ui.list.adapter.RealmListRecyclerViewAdapter
 import com.lcarino.bucketlist.ui.list.di.ListModule
-import com.lcarino.bucketlist.ui.list.model.Inspiration
 import com.lcarino.bucketlist.ui.list.model.ListItemModel
 import kotlinx.android.synthetic.main.fragment_layout_bucket_list.*
 
@@ -25,7 +24,6 @@ import kotlinx.android.synthetic.main.fragment_layout_bucket_list.*
  */
 class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView, RealmListRecyclerViewAdapter.ListItemActions {
 
-    var recyclerView: RealmRecyclerView? = null
     var adapter: RealmListRecyclerViewAdapter? = null
 
     override fun createPresenter(): ListFragmentPresenter {
@@ -56,9 +54,12 @@ class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView
 
     private fun setUpRecyclerView() {
         adapter = RealmListRecyclerViewAdapter(context, presenter.listItems, this)
-        recyclerViewBucketList.setAdapter(adapter)
+        recyclerView.setAdapter(adapter)
+        // custom item touch helper callback.
         val touchHelper: DragRealItemTouchHelperCallback = DragRealItemTouchHelperCallback(context, adapter)
-        ItemTouchHelper(touchHelper).attachToRecyclerView(recyclerViewBucketList.recycleView)
+        ItemTouchHelper(touchHelper).attachToRecyclerView(recyclerView.recycleView)
+
+
     }
 
     private fun handleKeyboardEnter() {
@@ -71,25 +72,14 @@ class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView
         })
     }
 
-    override fun showProgress() {
-
-    }
-
-    override fun hideProgress() {
-
-    }
-
-    override fun displayListItems(items: List<Inspiration>) {
-
-    }
-
     override fun clearInputField() {
         newListItemEditText.editableText.clear()
     }
 
     override fun scrollToBottom() {
         // TODO: 2/8/17 Scrolling to last item is overlapped by input field
-        recyclerViewBucketList.smoothScrollToPosition(adapter!!.itemCount - 1)
+        if (adapter!!.itemCount > 1)
+            recyclerView.smoothScrollToPosition(adapter!!.itemCount - 1)
     }
 
     override fun displayList(items: List<BucketListItemViewModel>) {
@@ -100,8 +90,16 @@ class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView
         //  presenter.updateListItem(id, newValue)
     }
 
-    companion object {
+    override fun onItemDeleted(itemId: String) {
+        Snackbar.make(recyclerView, getString(R.string.snack_item_deleted_msg), Snackbar.LENGTH_LONG)
+                .setAction(getString(R.string.snack_undo_delete), View.OnClickListener {
+                    presenter.undoDelete(itemId)
+                    adapter?.notifyDataSetChanged()
+                })
+                .show()
+    }
 
+    companion object {
         fun newInstance(): MyListFragment {
             return MyListFragment()
         }

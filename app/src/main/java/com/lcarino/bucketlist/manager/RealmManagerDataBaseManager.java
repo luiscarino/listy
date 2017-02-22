@@ -2,17 +2,18 @@ package com.lcarino.bucketlist.manager;
 
 import android.util.Log;
 
-import com.lcarino.bucketlist.model.List;
 import com.lcarino.bucketlist.model.ListEntry;
 import com.lcarino.bucketlist.ui.list.model.Entry;
+
+import java.util.Locale;
 
 import javax.inject.Inject;
 
 import io.realm.Realm;
-import io.realm.RealmList;
 import io.realm.RealmResults;
 
 /**
+ * Handles interaction with Realm.
  * Created by luiscarino on 2/11/17.
  */
 
@@ -25,25 +26,9 @@ public class RealmManagerDataBaseManager implements DataBaseManager {
         this.realm = realm;
     }
 
-
-    @Override
-    public void addList(List list) {
-
-    }
-
-    @Override
-    public void removeList(List list) {
-
-    }
-
-    @Override
-    public RealmList<List> fetchLists() {
-        return null;
-    }
-
     @Override
     public RealmResults<ListEntry> getListEntries() {
-        return realm.where(com.lcarino.bucketlist.model.ListEntry.class).findAll();
+        return realm.where(com.lcarino.bucketlist.model.ListEntry.class).equalTo("deleted", false).findAll();
     }
 
     @Override
@@ -56,19 +41,21 @@ public class RealmManagerDataBaseManager implements DataBaseManager {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
+                Log.d(getClass().getSimpleName(), String.format(Locale.getDefault(), "Copying object %s to realm", listEntry.toString()));
                 realm.copyToRealm(listEntry);
             }
         });
-
-        realm.beginTransaction();
-        RealmResults<com.lcarino.bucketlist.model.ListEntry> all = realm.where(com.lcarino.bucketlist.model.ListEntry.class).findAll();
-        Log.d("TAF::::::", String.format("Size %d", all.size()));
-        realm.commitTransaction();
     }
 
     @Override
-    public void remove(ListEntry listEntry) {
+    public void delete(String id) {
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                Log.d(getClass().getSimpleName(), "Deleting item from realm");
 
+            }
+        });
     }
 
     @Override
@@ -78,6 +65,16 @@ public class RealmManagerDataBaseManager implements DataBaseManager {
             public void execute(Realm realm) {
                 ListEntry listEntry = realm.where(ListEntry.class).equalTo("id", id).findFirst();
                 listEntry.setTitle(newValue);
+            }
+        });
+    }
+
+    public void undoDelete(final String itemId) {
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                ListEntry listEntry = realm.where(ListEntry.class).equalTo("id", itemId).findFirst();
+                listEntry.setDeleted(false);
             }
         });
     }
