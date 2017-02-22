@@ -12,7 +12,7 @@ import com.lcarino.bucketlist.application.BucketListApplication
 import com.lcarino.bucketlist.common.BaseFragment
 import com.lcarino.bucketlist.model.ui.BucketListItemViewModel
 import com.lcarino.bucketlist.ui.inspirations.ListFragmentPresenter
-import com.lcarino.bucketlist.ui.list.adapter.DragRealItemTouchHelperCallback
+import com.lcarino.bucketlist.ui.list.adapter.MyRealItemTouchHelperCallback
 import com.lcarino.bucketlist.ui.list.adapter.RealmListRecyclerViewAdapter
 import com.lcarino.bucketlist.ui.list.di.ListModule
 import com.lcarino.bucketlist.ui.list.model.ListItemModel
@@ -56,7 +56,7 @@ class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView
         adapter = RealmListRecyclerViewAdapter(context, presenter.listItems, this)
         recyclerView.setAdapter(adapter)
         // custom item touch helper callback.
-        val touchHelper: DragRealItemTouchHelperCallback = DragRealItemTouchHelperCallback(context, adapter)
+        val touchHelper: MyRealItemTouchHelperCallback = MyRealItemTouchHelperCallback(context, adapter)
         ItemTouchHelper(touchHelper).attachToRecyclerView(recyclerView.recycleView)
 
 

@@ -19,12 +19,12 @@ import io.realm.RealmBasedRecyclerViewAdapter;
  * Created by luiscarino on 2/18/17.
  */
 
-public class DragRealItemTouchHelperCallback extends RealmSimpleItemTouchHelperCallback {
+public class MyRealItemTouchHelperCallback extends RealmSimpleItemTouchHelperCallback {
 
     private Drawable background;
     private Drawable icon;
 
-    public DragRealItemTouchHelperCallback(Context context, RealmBasedRecyclerViewAdapter adapter) {
+    public MyRealItemTouchHelperCallback(Context context, RealmBasedRecyclerViewAdapter adapter) {
         setAdapter(adapter);
         background = new ColorDrawable(context.getResources().getColor(R.color.colorPrimaryLight));
         icon = context.getDrawable(R.drawable.ic_delete_sweep_white_24px);
@@ -37,14 +37,13 @@ public class DragRealItemTouchHelperCallback extends RealmSimpleItemTouchHelperC
 
     @Override
     public boolean isLongPressDragEnabled() {
-        return true;
+        return false;
     }
 
     @Override
     public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-        int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
         int swipeFlags = ItemTouchHelper.START;
-        return makeMovementFlags(dragFlags, swipeFlags);
+        return makeMovementFlags(0, swipeFlags);
     }
 
     @Override
