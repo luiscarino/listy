@@ -26,7 +26,8 @@ class RealmListRecyclerViewAdapter(
     // region actions
     interface ListItemActions {
         fun onEditItem(id: String, newValue: String)
-        fun onItemDeleted(itemId: String)
+        fun onItemDeleted(id: String)
+        fun onItemChecked(id: String, checked: Boolean)
     }
     // end region
 
@@ -63,6 +64,7 @@ class RealmListRecyclerViewAdapter(
                 } else {
                     title.setBackgroundDrawable(null)
                 }
+                listener.onItemChecked(itemView.tag as String,checkBox.isChecked)
             }
 
             title.tag = title.keyListener

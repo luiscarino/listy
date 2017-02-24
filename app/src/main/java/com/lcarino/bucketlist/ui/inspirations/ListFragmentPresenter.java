@@ -1,6 +1,6 @@
 package com.lcarino.bucketlist.ui.inspirations;
 
-import com.lcarino.bucketlist.manager.RealmManagerDataBaseManager;
+import com.lcarino.bucketlist.manager.MyRealmDataBaseManager;
 import com.lcarino.bucketlist.model.Category;
 import com.lcarino.bucketlist.model.ListEntry;
 import com.lcarino.bucketlist.mvp.MvpBasePresenter;
@@ -23,12 +23,12 @@ import io.realm.RealmResults;
 public class ListFragmentPresenter extends MvpBasePresenter<ListView> {
 
     private final EventBus eventBus;
-    private final RealmManagerDataBaseManager realmManagerDataBaseManager;
+    private final MyRealmDataBaseManager myRealmDataBaseManager;
 
     @Inject
-    public ListFragmentPresenter(EventBus eventBus, RealmManagerDataBaseManager realmManagerDataBaseManager) {
+    public ListFragmentPresenter(EventBus eventBus, MyRealmDataBaseManager myRealmDataBaseManager) {
         this.eventBus = eventBus;
-        this.realmManagerDataBaseManager = realmManagerDataBaseManager;
+        this.myRealmDataBaseManager = myRealmDataBaseManager;
     }
 
 
@@ -43,7 +43,7 @@ public class ListFragmentPresenter extends MvpBasePresenter<ListView> {
         listEntry1.setChecked(item.isCompleted());
         listEntry1.setTimestamp(new Date(System.currentTimeMillis()).toString());
         listEntry1.setCategory(new Category());
-        realmManagerDataBaseManager.add(listEntry1);
+        myRealmDataBaseManager.add(listEntry1);
     }
     
     @Override
@@ -54,15 +54,19 @@ public class ListFragmentPresenter extends MvpBasePresenter<ListView> {
 
 
     public RealmResults<ListEntry> getListItems() {
-        return realmManagerDataBaseManager.getListEntries();
+        return myRealmDataBaseManager.getListEntries();
     }
 
     public void updateListItem(String id, String newValue) {
-        realmManagerDataBaseManager.update(id, newValue);
+        myRealmDataBaseManager.update(id, newValue);
     }
 
     public void undoDelete(String itemId) {
-        realmManagerDataBaseManager.undoDelete(itemId);
+        myRealmDataBaseManager.undoDelete(itemId);
+    }
+
+    public void markAsCompleted(String id, boolean checked) {
+        myRealmDataBaseManager.markAsCompleted(id, checked);
     }
 
 }

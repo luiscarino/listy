@@ -17,12 +17,12 @@ import io.realm.RealmResults;
  * Created by luiscarino on 2/11/17.
  */
 
-public class RealmManagerDataBaseManager implements DataBaseManager {
+public class MyRealmDataBaseManager implements DataBaseManager {
 
     private final Realm realm;
 
     @Inject
-    public RealmManagerDataBaseManager(Realm realm) {
+    public MyRealmDataBaseManager(Realm realm) {
         this.realm = realm;
     }
 
@@ -75,6 +75,16 @@ public class RealmManagerDataBaseManager implements DataBaseManager {
             public void execute(Realm realm) {
                 ListEntry listEntry = realm.where(ListEntry.class).equalTo("id", itemId).findFirst();
                 listEntry.setDeleted(false);
+            }
+        });
+    }
+
+    public void markAsCompleted(final String id, final boolean checked) {
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                ListEntry listEntry = realm.where(ListEntry.class).equalTo("id", id).findFirst();
+                listEntry.setChecked(checked);
             }
         });
     }

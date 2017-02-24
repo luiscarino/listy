@@ -58,8 +58,6 @@ class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView
         // custom item touch helper callback.
         val touchHelper: MyRealItemTouchHelperCallback = MyRealItemTouchHelperCallback(context, adapter)
         ItemTouchHelper(touchHelper).attachToRecyclerView(recyclerView.recycleView)
-
-
     }
 
     private fun handleKeyboardEnter() {
@@ -97,6 +95,10 @@ class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView
                     adapter?.notifyDataSetChanged()
                 })
                 .show()
+    }
+
+    override fun onItemChecked(id: String, checked : Boolean) {
+        presenter.markAsCompleted(id, checked)
     }
 
     companion object {
