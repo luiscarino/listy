@@ -63,6 +63,7 @@ class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView
     private fun handleKeyboardEnter() {
         newListItemEditText.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                // FIXME : change this just pass the string presenter should be in charge of building the model.
                 presenter.addItem(ListItemModel("1", "", newListItemEditText.text.toString(), "", null, false))
                 return@OnKeyListener true
             }
@@ -85,7 +86,7 @@ class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView
     }
 
     override fun onEditItem(id: String, newValue: String) {
-        //  presenter.updateListItem(id, newValue)
+          presenter.updateListItem(id, newValue)
     }
 
     override fun onItemDeleted(itemId: String) {

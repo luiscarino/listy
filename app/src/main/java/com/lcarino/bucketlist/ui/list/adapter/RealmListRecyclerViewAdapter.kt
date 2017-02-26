@@ -1,6 +1,8 @@
 package com.lcarino.bucketlist.ui.list.adapter
 
 import android.content.Context
+import android.text.Editable
+import android.text.TextWatcher
 import android.text.method.KeyListener
 import android.view.View
 import android.view.ViewGroup
@@ -52,7 +54,7 @@ class RealmListRecyclerViewAdapter(
     }
 
     // region view holder
-    class ListViewHolder(v: View, listener: ListItemActions) : RealmViewHolder(v) {
+    class ListViewHolder(v: View, val listener: ListItemActions) : RealmViewHolder(v), TextWatcher {
         val checkBox: CheckBox = v.findViewById(R.id.bucketListCheckBox) as CheckBox
         val title: EditText = v.findViewById(R.id.bucketListItemDetail) as EditText
 
@@ -64,21 +66,31 @@ class RealmListRecyclerViewAdapter(
                 } else {
                     title.setBackgroundDrawable(null)
                 }
-                listener.onItemChecked(itemView.tag as String,checkBox.isChecked)
+                listener.onItemChecked(itemView.tag as String, checkBox.isChecked)
             }
 
             title.tag = title.keyListener
             title.keyListener = null
 
+
             title.setOnClickListener {
                 title.keyListener = title.tag as KeyListener
             }
 
-            title.onFocusChangeListener = View.OnFocusChangeListener { view, b ->
-                if (!b) {
-                    listener.onEditItem(itemView.tag.toString(), title.text.toString())
-                }
-            }
+
+            title.addTextChangedListener(this)
+        }
+
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            //no-op
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            //no-op
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+            listener.onEditItem(itemView.tag.toString(), s.toString())
         }
 
         internal fun bind(model: ListEntry) {
