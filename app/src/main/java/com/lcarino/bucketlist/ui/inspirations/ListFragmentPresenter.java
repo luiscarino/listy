@@ -32,18 +32,22 @@ public class ListFragmentPresenter extends MvpBasePresenter<ListView> {
     }
 
 
+    public void addItem(String title) {
+        com.lcarino.bucketlist.model.ListEntry listEntry1 = new com.lcarino.bucketlist.model.ListEntry();
+        listEntry1.setId(UUID.randomUUID().toString());
+        listEntry1.setTitle(title);
+        listEntry1.setDescription(null);
+        listEntry1.setChecked(false);
+        listEntry1.setTimestamp(new Date(System.currentTimeMillis()).toString());
+        listEntry1.setCategory(new Category());
+        myRealmDataBaseManager.add(listEntry1);
+    }
+
     public void addItem(ListItemModel item) {
         getView().clearInputField();
         getView().scrollToBottom();
         // FIXME: 2/21/17
-        com.lcarino.bucketlist.model.ListEntry listEntry1 = new com.lcarino.bucketlist.model.ListEntry();
-        listEntry1.setId(UUID.randomUUID().toString());
-        listEntry1.setTitle(item.getTitle());
-        listEntry1.setDescription(item.getDescription());
-        listEntry1.setChecked(item.isCompleted());
-        listEntry1.setTimestamp(new Date(System.currentTimeMillis()).toString());
-        listEntry1.setCategory(new Category());
-        myRealmDataBaseManager.add(listEntry1);
+
     }
 
     @Override

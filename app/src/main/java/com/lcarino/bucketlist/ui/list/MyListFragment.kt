@@ -13,7 +13,6 @@ import com.lcarino.bucketlist.ui.inspirations.ListFragmentPresenter
 import com.lcarino.bucketlist.ui.list.adapter.MyRealItemTouchHelperCallback
 import com.lcarino.bucketlist.ui.list.adapter.RealmListRecyclerViewAdapter
 import com.lcarino.bucketlist.ui.list.di.ListModule
-import com.lcarino.bucketlist.ui.list.model.ListItemModel
 import io.realm.RealmResults
 import kotlinx.android.synthetic.main.fragment_layout_bucket_list.*
 
@@ -41,7 +40,6 @@ class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-
         when (item?.itemId) {
             R.id.action_archive_completed -> {
                 presenter.archiveCompletedItems()
@@ -77,8 +75,7 @@ class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView
     private fun handleKeyboardEnter() {
         newListItemEditText.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                // FIXME : change this just pass the string presenter should be in charge of building the model.
-                presenter.addItem(ListItemModel("1", "", newListItemEditText.text.toString(), "", null, false))
+                presenter.addItem(newListItemEditText.text.toString())
                 return@OnKeyListener true
             }
             false
@@ -91,8 +88,8 @@ class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView
 
     override fun scrollToBottom() {
         // TODO: 2/8/17 Scrolling to last item is overlapped by input field
-        if (adapter!!.itemCount > 1)
-            recyclerView.smoothScrollToPosition(adapter!!.itemCount - 1)
+//        if (adapter!!.itemCount > 1)
+//            recyclerView.smoothScrollToPosition(adapter!!.itemCount - 1)
     }
 
     override fun displayList(items: List<BucketListItemViewModel>) {
