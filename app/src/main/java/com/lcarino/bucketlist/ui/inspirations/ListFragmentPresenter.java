@@ -36,7 +36,7 @@ public class ListFragmentPresenter extends MvpBasePresenter<ListView> {
         getView().clearInputField();
         getView().scrollToBottom();
         // FIXME: 2/21/17
-        com.lcarino.bucketlist.model.ListEntry listEntry1= new com.lcarino.bucketlist.model.ListEntry();
+        com.lcarino.bucketlist.model.ListEntry listEntry1 = new com.lcarino.bucketlist.model.ListEntry();
         listEntry1.setId(UUID.randomUUID().toString());
         listEntry1.setTitle(item.getTitle());
         listEntry1.setDescription(item.getDescription());
@@ -45,12 +45,11 @@ public class ListFragmentPresenter extends MvpBasePresenter<ListView> {
         listEntry1.setCategory(new Category());
         myRealmDataBaseManager.add(listEntry1);
     }
-    
+
     @Override
     public void detachView(boolean retainState) {
         super.detachView(retainState);
     }
-
 
 
     public RealmResults<ListEntry> getListItems() {
@@ -68,5 +67,14 @@ public class ListFragmentPresenter extends MvpBasePresenter<ListView> {
     public void markAsCompleted(String id, boolean checked) {
         myRealmDataBaseManager.markAsCompleted(id, checked);
     }
+
+    public void archiveCompletedItems() {
+        myRealmDataBaseManager.archiveCompleted();
+    }
+
+    public void showArchivedItems() {
+        view.showArchivedITems(myRealmDataBaseManager.getArchived());
+    }
+
 
 }

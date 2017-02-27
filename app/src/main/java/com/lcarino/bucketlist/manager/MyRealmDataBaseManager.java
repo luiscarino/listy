@@ -28,7 +28,7 @@ public class MyRealmDataBaseManager implements DataBaseManager {
 
     @Override
     public RealmResults<ListEntry> getListEntries() {
-        return realm.where(com.lcarino.bucketlist.model.ListEntry.class).equalTo("deleted", false).findAll();
+        return realm.where(com.lcarino.bucketlist.model.ListEntry.class).equalTo("deleted", false).equalTo("archived", false).findAll();
     }
 
     @Override
@@ -87,5 +87,21 @@ public class MyRealmDataBaseManager implements DataBaseManager {
                 listEntry.setChecked(checked);
             }
         });
+    }
+
+    public void archiveCompleted() {
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                RealmResults<ListEntry> completed = realm.where(ListEntry.class).equalTo("checked", true).findAll();
+               for( ListEntry entry : completed) {
+                    entry.setArchived(true);
+                }
+            }
+        });
+    }
+
+    public  RealmResults<ListEntry> getArchived() {
+        return realm.where(ListEntry.class).equalTo("archived", true).equalTo("deleted",false).findAll();
     }
 }

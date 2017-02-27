@@ -3,19 +3,18 @@ package com.lcarino.bucketlist.ui.list
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.helper.ItemTouchHelper
-import android.view.KeyEvent
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.lcarino.bucketlist.R
 import com.lcarino.bucketlist.application.BucketListApplication
 import com.lcarino.bucketlist.common.BaseFragment
+import com.lcarino.bucketlist.model.ListEntry
 import com.lcarino.bucketlist.model.ui.BucketListItemViewModel
 import com.lcarino.bucketlist.ui.inspirations.ListFragmentPresenter
 import com.lcarino.bucketlist.ui.list.adapter.MyRealItemTouchHelperCallback
 import com.lcarino.bucketlist.ui.list.adapter.RealmListRecyclerViewAdapter
 import com.lcarino.bucketlist.ui.list.di.ListModule
 import com.lcarino.bucketlist.ui.list.model.ListItemModel
+import io.realm.RealmResults
 import kotlinx.android.synthetic.main.fragment_layout_bucket_list.*
 
 
@@ -38,6 +37,21 @@ class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView
         super.onCreate(savedInstanceState)
         val listComponent = (activity.application as BucketListApplication).applicationComponent.plus(ListModule())
         listComponent.inject(this)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+
+        when (item?.itemId) {
+            R.id.action_archive_completed -> {
+                presenter.archiveCompletedItems()
+            }
+            R.id.action_show_archived -> {
+                presenter.showArchivedItems()
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -85,8 +99,12 @@ class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView
 
     }
 
+    override fun showArchivedITems(results: RealmResults<ListEntry>) {
+        adapter?.updateRealmResults(results)
+    }
+
     override fun onEditItem(id: String, newValue: String) {
-          presenter.updateListItem(id, newValue)
+        presenter.updateListItem(id, newValue)
     }
 
     override fun onItemDeleted(itemId: String) {
@@ -98,7 +116,7 @@ class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView
                 .show()
     }
 
-    override fun onItemChecked(id: String, checked : Boolean) {
+    override fun onItemChecked(id: String, checked: Boolean) {
         presenter.markAsCompleted(id, checked)
     }
 

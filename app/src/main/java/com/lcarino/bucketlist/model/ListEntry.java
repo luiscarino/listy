@@ -17,6 +17,7 @@ public class ListEntry extends RealmObject {
     private String timestamp;
     private Category category;
     private boolean deleted;
+    private boolean archived;
 
     public ListEntry() {
     }
@@ -75,5 +76,13 @@ public class ListEntry extends RealmObject {
 
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public boolean isArchived() {
+        return archived;
+    }
+
+    public void setArchived(boolean archived) {
+        this.archived = archived;
     }
 }

@@ -11,6 +11,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.lcarino.bucketlist.R;
 import com.lcarino.bucketlist.common.BaseFragment;
+import com.lcarino.bucketlist.model.ListEntry;
 import com.lcarino.bucketlist.model.ui.BucketListItemViewModel;
 import com.lcarino.bucketlist.ui.inspirations.adapter.InspirationsListRecyclerAdapter;
 import com.lcarino.bucketlist.ui.list.ListView;
@@ -21,6 +22,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 import butterknife.BindView;
+import io.realm.RealmResults;
 
 /**
  * A fragment that shows a list of bucket items.
@@ -114,4 +116,8 @@ public class InspirationListFragment extends BaseFragment<ListView, ListFragment
 
     }
 
+    @Override
+    public void showArchivedITems(@NotNull RealmResults<ListEntry> results) {
+
+    }
 }

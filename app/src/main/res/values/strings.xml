@@ -26,4 +26,9 @@
     <string name="add_button">Add</string>
     <string name="snack_item_deleted_msg">Item deleted</string>
     <string name="snack_undo_delete">UNDO</string>
+
+    <!--menu-->
+    <string name="action_archive_completed">Archive completed items</string>
+    <string name="action_show_archived">Show archived</string>
+    <string name="action_rate">Rate this app</string>
 </resources>
