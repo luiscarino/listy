@@ -5,7 +5,6 @@ import com.lcarino.bucketlist.model.Category;
 import com.lcarino.bucketlist.model.ListEntry;
 import com.lcarino.bucketlist.mvp.MvpBasePresenter;
 import com.lcarino.bucketlist.ui.list.ListView;
-import com.lcarino.bucketlist.ui.list.model.ListItemModel;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -34,6 +33,7 @@ public class ListFragmentPresenter extends MvpBasePresenter<ListView> {
 
     public void addItem(String title) {
         com.lcarino.bucketlist.model.ListEntry listEntry1 = new com.lcarino.bucketlist.model.ListEntry();
+        // TODO: 2/26/17 improve this
         listEntry1.setId(UUID.randomUUID().toString());
         listEntry1.setTitle(title);
         listEntry1.setDescription(null);
@@ -41,13 +41,7 @@ public class ListFragmentPresenter extends MvpBasePresenter<ListView> {
         listEntry1.setTimestamp(new Date(System.currentTimeMillis()).toString());
         listEntry1.setCategory(new Category());
         myRealmDataBaseManager.add(listEntry1);
-    }
-
-    public void addItem(ListItemModel item) {
         getView().clearInputField();
-        getView().scrollToBottom();
-        // FIXME: 2/21/17
-
     }
 
     @Override

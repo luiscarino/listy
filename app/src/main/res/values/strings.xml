@@ -31,4 +31,13 @@
     <string name="action_archive_completed">Archive completed items</string>
     <string name="action_show_archived">Show archived</string>
     <string name="action_rate">Rate this app</string>
+
+    <string name="menu_opened">Menu opened</string>
+    <string name="menu_closed">Menu closed</string>
+
+    <array name="drawer_list_items">
+        <item>List</item>
+        <item>Trash</item>
+        <item>Archive</item>
+    </array>
 </resources>
