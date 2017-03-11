@@ -11,7 +11,6 @@ import android.view.View
 import com.lcarino.bucketlist.R
 import com.lcarino.bucketlist.application.BucketListApplication
 import com.lcarino.bucketlist.common.BaseFragment
-import com.lcarino.bucketlist.ui.detail.DetailFragment
 import com.lcarino.bucketlist.ui.inspirations.InspirationListFragment
 import com.lcarino.bucketlist.ui.list.di.ListComponent
 import com.lcarino.bucketlist.ui.list.di.ListModule
@@ -108,8 +107,8 @@ class MainActivity : AppCompatActivity(),
     fun getFragmentForMenuItem(id: Int): Fragment {
         when (id) {
             R.id.action_listly -> return MyListFragment.newInstance()
-            R.id.action_archive -> return DetailFragment.newInstance("1")
-            R.id.action_trash -> return DetailFragment.newInstance("1")
+            R.id.action_archive -> return MyListFragment.newInstanceForArchive()
+            R.id.action_trash -> return MyListFragment.newInstanceForTrash()
             else -> throw IllegalStateException("ID not valid. Should be declared on menu file.")
         }
     }

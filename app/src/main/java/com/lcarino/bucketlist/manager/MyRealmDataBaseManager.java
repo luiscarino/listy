@@ -104,4 +104,8 @@ public class MyRealmDataBaseManager implements DataBaseManager {
     public  RealmResults<ListEntry> getArchived() {
         return realm.where(ListEntry.class).equalTo("archived", true).equalTo("deleted",false).findAll();
     }
+
+    public  RealmResults<ListEntry> getTrash() {
+        return realm.where(ListEntry.class).equalTo("deleted", true).findAll();
+    }
 }

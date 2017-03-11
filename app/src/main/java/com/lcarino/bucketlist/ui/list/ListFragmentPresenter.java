@@ -69,6 +69,14 @@ public class ListFragmentPresenter extends MvpBasePresenter<ListView> {
         myRealmDataBaseManager.archiveCompleted();
     }
 
+    public RealmResults<ListEntry> getArchived() {
+        return myRealmDataBaseManager.getArchived();
+    }
+
+    public RealmResults<ListEntry> getTrash() {
+        return myRealmDataBaseManager.getTrash();
+    }
+
     public void showArchivedItems() {
         view.showArchivedITems(myRealmDataBaseManager.getArchived());
     }
