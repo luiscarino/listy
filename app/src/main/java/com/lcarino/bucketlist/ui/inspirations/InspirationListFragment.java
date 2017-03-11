@@ -14,6 +14,7 @@ import com.lcarino.bucketlist.common.BaseFragment;
 import com.lcarino.bucketlist.model.ListEntry;
 import com.lcarino.bucketlist.model.ui.BucketListItemViewModel;
 import com.lcarino.bucketlist.ui.inspirations.adapter.InspirationsListRecyclerAdapter;
+import com.lcarino.bucketlist.ui.list.ListFragmentPresenter;
 import com.lcarino.bucketlist.ui.list.ListView;
 import com.lcarino.bucketlist.ui.list.model.Inspiration;
 

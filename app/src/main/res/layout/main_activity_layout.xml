@@ -8,6 +8,7 @@
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
@@ -30,16 +31,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
-        <!-- The navigation drawer -->
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/left_drawer"
+
+        <android.support.design.widget.NavigationView
+            android:id="@+id/my_nav_view"
+            style="@style/MyCustomNavView"
             android:layout_width="240dp"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:background="#fff"
-            android:choiceMode="singleChoice"
-            android:divider="@android:color/transparent"
-            android:dividerHeight="0dp" />
+            app:menu="@menu/menu_nav_view"
+            app:itemBackground="@drawable/menu_item_selector"/>
     </android.support.v4.widget.DrawerLayout>
 </RelativeLayout>
 

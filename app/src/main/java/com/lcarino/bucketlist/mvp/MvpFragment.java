@@ -15,7 +15,7 @@ public abstract class MvpFragment <V extends MvpView, P extends MvpPresenter<V>>
     /**
      * Instantiate a getListPresenter instance
      *
-     * @return The {@link MvpPresenter} for this view
+     * @return The {@link com.lcarino.bucketlist.mvp.kotlin.MvpPresenter} for this view
      */
     public  abstract P createPresenter();
 

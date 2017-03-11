@@ -52,4 +52,9 @@
         <item name="textAllCaps">true</item>
     </style>
 
+
+    <!-- custom nav view-->
+    <style name="MyCustomNavView" parent="Widget.Design.NavigationView">
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
 </resources>

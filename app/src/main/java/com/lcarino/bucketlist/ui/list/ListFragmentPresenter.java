@@ -1,10 +1,9 @@
-package com.lcarino.bucketlist.ui.inspirations;
+package com.lcarino.bucketlist.ui.list;
 
 import com.lcarino.bucketlist.manager.MyRealmDataBaseManager;
 import com.lcarino.bucketlist.model.Category;
 import com.lcarino.bucketlist.model.ListEntry;
 import com.lcarino.bucketlist.mvp.MvpBasePresenter;
-import com.lcarino.bucketlist.ui.list.ListView;
 
 import org.greenrobot.eventbus.EventBus;
 

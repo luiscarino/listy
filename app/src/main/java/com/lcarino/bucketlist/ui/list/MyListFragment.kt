@@ -9,7 +9,7 @@ import com.lcarino.bucketlist.application.BucketListApplication
 import com.lcarino.bucketlist.common.BaseFragment
 import com.lcarino.bucketlist.model.ListEntry
 import com.lcarino.bucketlist.model.ui.BucketListItemViewModel
-import com.lcarino.bucketlist.ui.inspirations.ListFragmentPresenter
+import com.lcarino.bucketlist.ui.list.ListFragmentPresenter
 import com.lcarino.bucketlist.ui.list.adapter.MyRealItemTouchHelperCallback
 import com.lcarino.bucketlist.ui.list.adapter.RealmListRecyclerViewAdapter
 import com.lcarino.bucketlist.ui.list.di.ListModule

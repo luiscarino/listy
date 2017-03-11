@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/action_listly"
+            android:icon="@drawable/ic_list"
+            android:title="Listly"
+            />
+
+        <item
+            android:id="@+id/action_trash"
+            android:icon="@drawable/ic_delete_black_48px"
+            android:title="Trash"
+            />
+
+        <item
+            android:id="@+id/action_archive"
+            android:icon="@drawable/ic_archive_black_48px"
+            android:title="Archive"
+         />
+    </group>
+</menu>
