@@ -9,7 +9,6 @@ import com.lcarino.bucketlist.application.BucketListApplication
 import com.lcarino.bucketlist.common.BaseFragment
 import com.lcarino.bucketlist.model.ListEntry
 import com.lcarino.bucketlist.model.ui.BucketListItemViewModel
-import com.lcarino.bucketlist.ui.inspirations.ListFragmentPresenter
 import com.lcarino.bucketlist.ui.list.adapter.MyRealItemTouchHelperCallback
 import com.lcarino.bucketlist.ui.list.adapter.RealmListRecyclerViewAdapter
 import com.lcarino.bucketlist.ui.list.di.ListModule
@@ -32,11 +31,17 @@ class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView
         return R.layout.fragment_layout_bucket_list
     }
 
+    var launchType = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val listComponent = (activity.application as BucketListApplication).applicationComponent.plus(ListModule())
         listComponent.inject(this)
         setHasOptionsMenu(true)
+        if(arguments == null) return
+        if (arguments.containsKey("launch.type")) {
+            launchType = arguments.getInt("launch.type")
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -65,7 +70,13 @@ class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView
     }
 
     private fun setUpRecyclerView() {
-        adapter = RealmListRecyclerViewAdapter(context, presenter.listItems, this)
+
+        when(launchType) {
+            0 -> adapter = RealmListRecyclerViewAdapter(context, presenter.listItems, this)
+            1 -> adapter = RealmListRecyclerViewAdapter(context, presenter.archived, this)
+            2 -> adapter = RealmListRecyclerViewAdapter(context, presenter.trash, this)
+        }
+
         recyclerView.setAdapter(adapter)
         // custom item touch helper callback.
         val touchHelper: MyRealItemTouchHelperCallback = MyRealItemTouchHelperCallback(context, adapter)
@@ -121,5 +132,25 @@ class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView
         fun newInstance(): MyListFragment {
             return MyListFragment()
         }
+
+        fun newInstanceForArchive(): MyListFragment {
+            val LAUNCH_TYPE_KEY = "launch.type"
+            var myListFragment = MyListFragment()
+            var bundle = Bundle()
+            bundle.putInt(LAUNCH_TYPE_KEY, 1)
+            myListFragment.arguments = bundle
+            return myListFragment
+        }
+
+        fun newInstanceForTrash() : MyListFragment {
+            val LAUNCH_TYPE_KEY = "launch.type"
+            var myListFragment = MyListFragment()
+            var bundle = Bundle()
+            bundle.putInt(LAUNCH_TYPE_KEY, 2)
+            myListFragment.arguments = bundle
+            return myListFragment
+        }
     }
+
+
 }

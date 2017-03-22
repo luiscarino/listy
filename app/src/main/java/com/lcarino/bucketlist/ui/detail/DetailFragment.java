@@ -1,6 +1,5 @@
 package com.lcarino.bucketlist.ui.detail;
 
-import android.graphics.drawable.Animatable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -55,12 +54,12 @@ public class DetailFragment extends BaseFragment<DetailView, DetailPresenter>  i
         super.onViewCreated(view, savedInstanceState);
         presenter.attachView(this);
 
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((Animatable) imageView.getDrawable()).start();
-            }
-        });
+//        imageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ((Animatable) imageView.getDrawable()).start();
+//            }
+//        });
 
     }
 

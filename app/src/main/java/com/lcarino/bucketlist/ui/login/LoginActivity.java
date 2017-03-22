@@ -2,6 +2,7 @@ package com.lcarino.bucketlist.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -12,7 +13,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.lcarino.bucketlist.R;
 import com.lcarino.bucketlist.application.BucketListApplication;
 import com.lcarino.bucketlist.mvp.MvpActivity;
-import com.lcarino.bucketlist.ui.list.BucketListActivity;
+import com.lcarino.bucketlist.ui.list.MainActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,6 +47,11 @@ public class LoginActivity extends MvpActivity<LoginView, LoginPresenter> implem
         if (presenter.isAuthenticated()) {
             navigateToList();
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
     }
 
     @OnClick(R.id.email_sign_in_button)
@@ -93,7 +99,7 @@ public class LoginActivity extends MvpActivity<LoginView, LoginPresenter> implem
 
     @Override
     public void loginSuccessful() {
-        Intent homeIntent = new Intent(this, BucketListActivity.class);
+        Intent homeIntent = new Intent(this, MainActivity.class);
         startActivity(homeIntent);
         finish();
     }
@@ -104,7 +110,7 @@ public class LoginActivity extends MvpActivity<LoginView, LoginPresenter> implem
     }
 
     public void navigateToList() {
-        Intent intent = new Intent(this, BucketListActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }

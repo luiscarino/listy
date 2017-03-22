@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.lcarino.bucketlist.ui.list.BucketListActivity">
+    tools:context="com.lcarino.bucketlist.ui.list.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <include
-        layout="@layout/content_main" />
+        layout="@layout/main_activity_layout" />
 
 
 </android.support.design.widget.CoordinatorLayout>
