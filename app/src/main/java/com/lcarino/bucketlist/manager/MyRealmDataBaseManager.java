@@ -28,7 +28,10 @@ public class MyRealmDataBaseManager implements DataBaseManager {
 
     @Override
     public RealmResults<ListEntry> getListEntries() {
-        return realm.where(com.lcarino.bucketlist.model.ListEntry.class).equalTo("deleted", false).equalTo("archived", false).findAll();
+        return realm.where(com.lcarino.bucketlist.model.ListEntry.class)
+                .equalTo("deleted", false)
+                .equalTo("archived", false)
+                .findAllAsync();
     }
 
     @Override
@@ -63,7 +66,9 @@ public class MyRealmDataBaseManager implements DataBaseManager {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                ListEntry listEntry = realm.where(ListEntry.class).equalTo("id", id).findFirst();
+                ListEntry listEntry = realm.where(ListEntry.class)
+                        .equalTo("id", id)
+                        .findFirst();
                 listEntry.setTitle(newValue);
             }
         });
@@ -73,7 +78,9 @@ public class MyRealmDataBaseManager implements DataBaseManager {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                ListEntry listEntry = realm.where(ListEntry.class).equalTo("id", itemId).findFirst();
+                ListEntry listEntry = realm.where(ListEntry.class)
+                        .equalTo("id", itemId)
+                        .findFirst();
                 listEntry.setDeleted(false);
             }
         });
@@ -83,7 +90,9 @@ public class MyRealmDataBaseManager implements DataBaseManager {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                ListEntry listEntry = realm.where(ListEntry.class).equalTo("id", id).findFirst();
+                ListEntry listEntry = realm.where(ListEntry.class)
+                        .equalTo("id", id)
+                        .findFirst();
                 listEntry.setChecked(checked);
             }
         });
@@ -93,7 +102,9 @@ public class MyRealmDataBaseManager implements DataBaseManager {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                RealmResults<ListEntry> completed = realm.where(ListEntry.class).equalTo("checked", true).findAll();
+                RealmResults<ListEntry> completed = realm.where(ListEntry.class)
+                        .equalTo("checked", true)
+                        .findAll();
                for( ListEntry entry : completed) {
                     entry.setArchived(true);
                 }
@@ -102,10 +113,15 @@ public class MyRealmDataBaseManager implements DataBaseManager {
     }
 
     public  RealmResults<ListEntry> getArchived() {
-        return realm.where(ListEntry.class).equalTo("archived", true).equalTo("deleted",false).findAll();
+        return realm.where(ListEntry.class)
+                .equalTo("archived", true)
+                .equalTo("deleted",false)
+                .findAllAsync();
     }
 
     public  RealmResults<ListEntry> getTrash() {
-        return realm.where(ListEntry.class).equalTo("deleted", true).findAll();
+        return realm.where(ListEntry.class)
+                .equalTo("deleted", true)
+                .findAllAsync();
     }
 }
