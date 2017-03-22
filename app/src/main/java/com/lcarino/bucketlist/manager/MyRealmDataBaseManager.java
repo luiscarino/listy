@@ -31,7 +31,7 @@ public class MyRealmDataBaseManager implements DataBaseManager {
         return realm.where(com.lcarino.bucketlist.model.ListEntry.class)
                 .equalTo("deleted", false)
                 .equalTo("archived", false)
-                .findAllAsync();
+                .findAll();
     }
 
     @Override
@@ -116,12 +116,12 @@ public class MyRealmDataBaseManager implements DataBaseManager {
         return realm.where(ListEntry.class)
                 .equalTo("archived", true)
                 .equalTo("deleted",false)
-                .findAllAsync();
+                .findAll();
     }
 
     public  RealmResults<ListEntry> getTrash() {
         return realm.where(ListEntry.class)
                 .equalTo("deleted", true)
-                .findAllAsync();
+                .findAll();
     }
 }

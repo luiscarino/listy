@@ -22,6 +22,7 @@ import kotlinx.android.synthetic.main.fragment_layout_bucket_list.*
 class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView, RealmListRecyclerViewAdapter.ListItemActions {
 
     var adapter: RealmListRecyclerViewAdapter? = null
+    val LAUNCH_TYPE = "launch.type"
 
     override fun createPresenter(): ListFragmentPresenter {
         return activityActions.listComponent.listPresenter
@@ -39,8 +40,8 @@ class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView
         listComponent.inject(this)
         setHasOptionsMenu(true)
         if(arguments == null) return
-        if (arguments.containsKey("launch.type")) {
-            launchType = arguments.getInt("launch.type")
+        if (arguments.containsKey(LAUNCH_TYPE)) {
+            launchType = arguments.getInt(LAUNCH_TYPE)
         }
     }
 
@@ -67,6 +68,12 @@ class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView
         val view = super.onCreateView(inflater, container, savedInstanceState)
         presenter.attachView(this)
         return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        var refWatcher = BucketListApplication.getRefWatcher()
+        refWatcher.watch(this)
     }
 
     private fun setUpRecyclerView() {

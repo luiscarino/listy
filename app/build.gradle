@@ -14,11 +14,16 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField "boolean", "INIT_LEAK_CANARY", "true"
     }
     buildTypes {
+        debug{
+            buildConfigField "boolean", "INIT_LEAK_CANARY", "true"
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "boolean", "INIT_LEAK_CANARY", "false"
         }
     }
 }
@@ -78,6 +83,11 @@ dependencies {
     testCompile "org.powermock:powermock-module-junit4:$rootProject.ext.powerMockito"
     testCompile "org.powermock:powermock-api-mockito:$rootProject.ext.powerMockito"
     testCompile 'junit:junit:4.12'
+
+    // leak canary
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
 }
 
 apply plugin: 'com.google.gms.google-services'
