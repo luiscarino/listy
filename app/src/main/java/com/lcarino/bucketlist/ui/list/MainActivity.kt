@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity(),
 
             override fun onDrawerClosed(drawerView: View?) {
                 super.onDrawerClosed(drawerView)
-
+                loadFragmentForId()
             }
         }
 
@@ -94,13 +94,18 @@ class MainActivity : AppCompatActivity(),
         return (application as BucketListApplication).applicationComponent.plus(ListModule())
     }
 
+    var selectedItemId = 0
     fun onMenuItemClicked(item: MenuItem) {
         item.isChecked = true
+        drawer_layout.closeDrawers()
+        selectedItemId = item.itemId
+    }
+
+    fun loadFragmentForId(){
         supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragment_container, getFragmentForMenuItem(item.itemId))
+                .replace(R.id.fragment_container, getFragmentForMenuItem(selectedItemId))
                 .commit()
-        drawer_layout.closeDrawers()
     }
 
 
