@@ -48,7 +48,11 @@ class MainActivity : AppCompatActivity(),
 
             override fun onDrawerClosed(drawerView: View?) {
                 super.onDrawerClosed(drawerView)
-                loadFragmentForId()
+                if (refreshDrawer) {
+                    loadFragmentForId()
+                    refreshDrawer = false
+                }
+
             }
         }
 
@@ -95,13 +99,15 @@ class MainActivity : AppCompatActivity(),
     }
 
     var selectedItemId = 0
+    var refreshDrawer = false
     fun onMenuItemClicked(item: MenuItem) {
         item.isChecked = true
         drawer_layout.closeDrawers()
         selectedItemId = item.itemId
+        refreshDrawer = true
     }
 
-    fun loadFragmentForId(){
+    fun loadFragmentForId() {
         supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.fragment_container, getFragmentForMenuItem(selectedItemId))
