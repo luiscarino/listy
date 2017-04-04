@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity(),
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_bucket_list, menu)
+      //  menuInflater.inflate(R.menu.menu_bucket_list, menu)
         return true
     }
 
@@ -117,7 +117,7 @@ class MainActivity : AppCompatActivity(),
 
     fun getFragmentForMenuItem(id: Int): Fragment {
         when (id) {
-            R.id.action_listly -> return MyListFragment.newInstance()
+            R.id.action_listly -> return MyListFragment.newInstanceForListy()
             R.id.action_archive -> return MyListFragment.newInstanceForArchive()
             R.id.action_trash -> return MyListFragment.newInstanceForTrash()
             else -> throw IllegalStateException("ID not valid. Should be declared on menu file.")

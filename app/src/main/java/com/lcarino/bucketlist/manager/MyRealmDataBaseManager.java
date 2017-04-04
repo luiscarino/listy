@@ -3,7 +3,6 @@ package com.lcarino.bucketlist.manager;
 import android.util.Log;
 
 import com.lcarino.bucketlist.model.ListEntry;
-import com.lcarino.bucketlist.ui.list.model.Entry;
 
 import java.util.Locale;
 
@@ -14,7 +13,8 @@ import io.realm.RealmResults;
 
 /**
  * Handles interaction with Realm.
- * Created by luiscarino on 2/11/17.
+ *
+ * @author luis carino
  */
 
 public class MyRealmDataBaseManager implements DataBaseManager {
@@ -33,12 +33,7 @@ public class MyRealmDataBaseManager implements DataBaseManager {
                 .equalTo("archived", false)
                 .findAll();
     }
-
-    @Override
-    public void insertEntry(final Entry entry) {
-
-    }
-
+    
     @Override
     public void add(final com.lcarino.bucketlist.model.ListEntry listEntry) {
         realm.executeTransaction(new Realm.Transaction() {
@@ -74,6 +69,7 @@ public class MyRealmDataBaseManager implements DataBaseManager {
         });
     }
 
+    @Override
     public void undoDelete(final String itemId) {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
@@ -86,6 +82,7 @@ public class MyRealmDataBaseManager implements DataBaseManager {
         });
     }
 
+    @Override
     public void markAsCompleted(final String id, final boolean checked) {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
@@ -98,6 +95,7 @@ public class MyRealmDataBaseManager implements DataBaseManager {
         });
     }
 
+    @Override
     public void archiveCompleted() {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
@@ -105,21 +103,50 @@ public class MyRealmDataBaseManager implements DataBaseManager {
                 RealmResults<ListEntry> completed = realm.where(ListEntry.class)
                         .equalTo("checked", true)
                         .findAll();
-               for( ListEntry entry : completed) {
+                for (ListEntry entry : completed) {
                     entry.setArchived(true);
                 }
             }
         });
     }
 
-    public  RealmResults<ListEntry> getArchived() {
+    @Override
+    public void emptyTrash() {
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                RealmResults<ListEntry> deleted = realm.where(ListEntry.class)
+                        .equalTo("deleted", true)
+                        .findAll();
+                deleted.deleteAllFromRealm();
+            }
+        });
+    }
+
+    @Override
+    public void unarchiveAll() {
+        realm.executeTransactionAsync(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                RealmResults<ListEntry> archived = realm.where(ListEntry.class)
+                        .equalTo("archived", true)
+                        .equalTo("deleted", false)
+                        .findAll();
+                for (ListEntry entry : archived) {
+                    entry.setArchived(false);
+                }
+            }
+        });
+    }
+
+    public RealmResults<ListEntry> getArchived() {
         return realm.where(ListEntry.class)
                 .equalTo("archived", true)
-                .equalTo("deleted",false)
+                .equalTo("deleted", false)
                 .findAll();
     }
 
-    public  RealmResults<ListEntry> getTrash() {
+    public RealmResults<ListEntry> getTrash() {
         return realm.where(ListEntry.class)
                 .equalTo("deleted", true)
                 .findAll();

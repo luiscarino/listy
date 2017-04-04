@@ -69,6 +69,15 @@ public class ListFragmentPresenter extends MvpBasePresenter<ListView> {
         myRealmDataBaseManager.archiveCompleted();
     }
 
+    public void emptyTrash() {
+        // TODO: display confirmation dialog before calling delete.
+        myRealmDataBaseManager.emptyTrash();
+    }
+
+    public void unarchiveAll() {
+        myRealmDataBaseManager.unarchiveAll();
+    }
+
     public RealmResults<ListEntry> getArchived() {
         return myRealmDataBaseManager.getArchived();
     }

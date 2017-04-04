@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.fragment_layout_bucket_list.*
 class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView, RealmListRecyclerViewAdapter.ListItemActions {
 
     var adapter: RealmListRecyclerViewAdapter? = null
-    val LAUNCH_TYPE = "launch.type"
+    val LAUNCH_TYPE_KEY = "launch.type"
 
     override fun createPresenter(): ListFragmentPresenter {
         return activityActions.listComponent.listPresenter
@@ -39,10 +39,15 @@ class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView
         val listComponent = (activity.application as BucketListApplication).applicationComponent.plus(ListModule())
         listComponent.inject(this)
         setHasOptionsMenu(true)
-        if(arguments == null) return
-        if (arguments.containsKey(LAUNCH_TYPE)) {
-            launchType = arguments.getInt(LAUNCH_TYPE)
+        if (arguments == null) return
+        if (arguments.containsKey(LAUNCH_TYPE_KEY)) {
+            launchType = arguments.getInt(LAUNCH_TYPE_KEY)
         }
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater?.inflate(getMenuIdFOrLaunchType(launchType), menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -50,8 +55,11 @@ class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView
             R.id.action_archive_completed -> {
                 presenter.archiveCompletedItems()
             }
-            R.id.action_show_archived -> {
-                presenter.showArchivedItems()
+            R.id.action_trash_delete_all -> {
+                presenter.emptyTrash()
+            }
+            R.id.action_archive_unarchive_all -> {
+                presenter.unarchiveAll()
             }
         }
 
@@ -76,9 +84,13 @@ class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView
         refWatcher.watch(this)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
     private fun setUpRecyclerView() {
 
-        when(launchType) {
+        when (launchType) {
             0 -> adapter = RealmListRecyclerViewAdapter(context, presenter.listItems, this)
             1 -> adapter = RealmListRecyclerViewAdapter(context, presenter.archived, this)
             2 -> adapter = RealmListRecyclerViewAdapter(context, presenter.trash, this)
@@ -135,25 +147,40 @@ class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView
         presenter.markAsCompleted(id, checked)
     }
 
+    fun getMenuIdFOrLaunchType(launchType: Int): Int {
+        when (launchType) {
+            LAUNCH_MODE_LISTY -> return R.menu.menu_bucket_list
+            LAUNCH_MODE_TRASH -> return R.menu.menu_trash
+            LAUNCH_MODE_ARCHIVE -> return R.menu.menu_archive
+            else -> throw IllegalStateException("ID not valid. Should be declared on menu file.")
+        }
+    }
+
     companion object {
+        val LAUNCH_TYPE_KEY = "launch.type"
+        val LAUNCH_MODE_LISTY: Int = 0
+        val LAUNCH_MODE_TRASH: Int = 2
+        val LAUNCH_MODE_ARCHIVE: Int = 1
         fun newInstance(): MyListFragment {
             return MyListFragment()
         }
 
-        fun newInstanceForArchive(): MyListFragment {
-            val LAUNCH_TYPE_KEY = "launch.type"
-            var myListFragment = MyListFragment()
-            var bundle = Bundle()
-            bundle.putInt(LAUNCH_TYPE_KEY, 1)
-            myListFragment.arguments = bundle
-            return myListFragment
+        fun newInstanceForListy(): MyListFragment {
+            return createFragmentForLaunchMode(LAUNCH_MODE_LISTY)
         }
 
-        fun newInstanceForTrash() : MyListFragment {
-            val LAUNCH_TYPE_KEY = "launch.type"
-            var myListFragment = MyListFragment()
-            var bundle = Bundle()
-            bundle.putInt(LAUNCH_TYPE_KEY, 2)
+        fun newInstanceForArchive(): MyListFragment {
+            return createFragmentForLaunchMode(LAUNCH_MODE_ARCHIVE)
+        }
+
+        fun newInstanceForTrash(): MyListFragment {
+            return createFragmentForLaunchMode(LAUNCH_MODE_TRASH)
+        }
+
+        private fun createFragmentForLaunchMode(launchMode: Int): MyListFragment {
+            val myListFragment = MyListFragment()
+            val bundle = Bundle()
+            bundle.putInt(LAUNCH_TYPE_KEY, launchMode)
             myListFragment.arguments = bundle
             return myListFragment
         }
