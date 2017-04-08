@@ -12,14 +12,19 @@ import com.lcarino.bucketlist.model.ui.BucketListItemViewModel
 import com.lcarino.bucketlist.ui.list.adapter.MyRealItemTouchHelperCallback
 import com.lcarino.bucketlist.ui.list.adapter.RealmListRecyclerViewAdapter
 import com.lcarino.bucketlist.ui.list.di.ListModule
+import com.lcarino.bucketlist.ui.list.dialog.ConfirmDialog
 import io.realm.RealmResults
 import kotlinx.android.synthetic.main.fragment_layout_bucket_list.*
+import kotlinx.android.synthetic.main.list_empty_state.*
 
 
 /**
  * Simple {@link Fragment} to display a list of items.
  */
-class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView, RealmListRecyclerViewAdapter.ListItemActions {
+class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(),
+        ListView,
+        RealmListRecyclerViewAdapter.ListItemActions,
+        ConfirmDialog.ConfirmDialogActions {
 
     var adapter: RealmListRecyclerViewAdapter? = null
     val LAUNCH_TYPE_KEY = "launch.type"
@@ -68,7 +73,7 @@ class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        setUpRecyclerView()
+        setViewForLaunchType()
         handleKeyboardEnter()
     }
 
@@ -88,12 +93,44 @@ class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView
         super.onDestroy()
     }
 
-    private fun setUpRecyclerView() {
+    private fun setViewForLaunchType() {
 
         when (launchType) {
-            0 -> adapter = RealmListRecyclerViewAdapter(context, presenter.listItems, this)
-            1 -> adapter = RealmListRecyclerViewAdapter(context, presenter.archived, this)
-            2 -> adapter = RealmListRecyclerViewAdapter(context, presenter.trash, this)
+            LAUNCH_MODE_LISTY -> {
+                val listItems = presenter.listItems
+                if (listItems.size > 0) {
+                    adapter = RealmListRecyclerViewAdapter(context, listItems, this)
+                } else {
+                    empty_list_icon.setImageDrawable(context.getDrawable(R.drawable.ic_list))
+                    empty_list_title.text = getString(R.string.empty_list_title)
+                    view_switcher.showNext()
+                }
+
+            }
+            LAUNCH_MODE_ARCHIVE -> {
+                val archived = presenter.archived
+                if (archived.size > 0) {
+                    adapter = RealmListRecyclerViewAdapter(context, archived, this)
+
+                } else {
+                    empty_list_icon.setImageDrawable(context.getDrawable(R.drawable.ic_archive_black_48px))
+                    empty_list_title.text = getString(R.string.empty_archive_title)
+                    view_switcher.showNext()
+                }
+                newListItemEditText.visibility = View.GONE
+
+            }
+            LAUNCH_MODE_TRASH -> {
+                val trash = presenter.trash
+                if (trash.size > 0) {
+                    adapter = RealmListRecyclerViewAdapter(context, trash, this)
+                } else {
+                    empty_list_icon.setImageDrawable(context.getDrawable(R.drawable.ic_delete_black_48px))
+                    empty_list_title.text = getString(R.string.empty_trash_title)
+                    view_switcher.showNext()
+                }
+                newListItemEditText.visibility = View.GONE
+            }
         }
 
         recyclerView.setAdapter(adapter)
@@ -143,8 +180,22 @@ class MyListFragment : BaseFragment<ListView, ListFragmentPresenter>(), ListView
                 .show()
     }
 
+    override fun displayAlertDialog() {
+        val addDialogFragment = ConfirmDialog()
+        addDialogFragment.actions = this
+        addDialogFragment.show(fragmentManager, "MyListFragmentDeleteDialog")
+    }
+
     override fun onItemChecked(id: String, checked: Boolean) {
         presenter.markAsCompleted(id, checked)
+    }
+
+    override fun onConfirm() {
+        presenter.confirmDeleteTrash()
+    }
+
+    override fun onCancel() {
+
     }
 
     fun getMenuIdFOrLaunchType(launchType: Int): Int {

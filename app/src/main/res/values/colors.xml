@@ -12,7 +12,7 @@
     <!--<color name="colorAccent">#F2D76C </color>-->
     <!--<color name="colorAccentAux">#a72292</color>-->
 
-    <color name="colorPrimary">#FFF</color>
+    <color name="colorPrimary">#ffffff</color>
     <color name="colorPrimaryDark">#37474F</color>
     <color name="colorPrimaryLight">#B0BEC5</color>
     <color name="colorAccent">#3F51B5</color>

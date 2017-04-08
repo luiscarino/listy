@@ -57,4 +57,11 @@
     <style name="MyCustomNavView" parent="Widget.Design.NavigationView">
         <item name="android:background">@color/colorPrimary</item>
     </style>
+
+    <!-- custom dialog-->
+    <style name="AlertDialogCustom" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:textColor">@color/primaryText</item>
+        <item name="android:background">#FFF</item>
+    </style>
+
 </resources>

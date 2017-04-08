@@ -28,19 +28,30 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
-    <co.moonmonkeylabs.realmrecyclerview.RealmRecyclerView
-        android:id="@+id/recyclerView"
+    <ViewSwitcher
+        android:id="@+id/view_switcher"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/newListItemEditText"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:rrvEmptyLayoutId="@layout/empty_list_view"
-        app:rrvIsRefreshable="false"
-        app:rrvLayoutType="LinearLayout"
-        app:rrvSwipeToDelete="false" />
+        app:layout_constraintVertical_bias="0.0">
+
+        <co.moonmonkeylabs.realmrecyclerview.RealmRecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            app:rrvEmptyLayoutId="@layout/empty_list_view"
+            app:rrvIsRefreshable="false"
+            app:rrvLayoutType="LinearLayout"
+            app:rrvSwipeToDelete="false" />
+
+        <include layout="@layout/list_empty_state" />
+
+    </ViewSwitcher>
+
+
 </android.support.constraint.ConstraintLayout>

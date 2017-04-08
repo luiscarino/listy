@@ -1,15 +1,23 @@
 package com.lcarino.bucketlist.manager;
 
+import android.support.annotation.StringDef;
 import android.util.Log;
 
 import com.lcarino.bucketlist.model.ListEntry;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.Locale;
 
 import javax.inject.Inject;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
+
+import static com.lcarino.bucketlist.manager.MyRealmDataBaseManager.COLUMNS.ARCHIVED;
+import static com.lcarino.bucketlist.manager.MyRealmDataBaseManager.COLUMNS.CHECKED;
+import static com.lcarino.bucketlist.manager.MyRealmDataBaseManager.COLUMNS.DELETED;
+import static com.lcarino.bucketlist.manager.MyRealmDataBaseManager.COLUMNS.ID;
 
 /**
  * Handles interaction with Realm.
@@ -29,11 +37,11 @@ public class MyRealmDataBaseManager implements DataBaseManager {
     @Override
     public RealmResults<ListEntry> getListEntries() {
         return realm.where(com.lcarino.bucketlist.model.ListEntry.class)
-                .equalTo("deleted", false)
-                .equalTo("archived", false)
+                .equalTo(DELETED, false)
+                .equalTo(ARCHIVED, false)
                 .findAll();
     }
-    
+
     @Override
     public void add(final com.lcarino.bucketlist.model.ListEntry listEntry) {
         realm.executeTransaction(new Realm.Transaction() {
@@ -62,7 +70,7 @@ public class MyRealmDataBaseManager implements DataBaseManager {
             @Override
             public void execute(Realm realm) {
                 ListEntry listEntry = realm.where(ListEntry.class)
-                        .equalTo("id", id)
+                        .equalTo(ID, id)
                         .findFirst();
                 listEntry.setTitle(newValue);
             }
@@ -75,7 +83,7 @@ public class MyRealmDataBaseManager implements DataBaseManager {
             @Override
             public void execute(Realm realm) {
                 ListEntry listEntry = realm.where(ListEntry.class)
-                        .equalTo("id", itemId)
+                        .equalTo(ID, itemId)
                         .findFirst();
                 listEntry.setDeleted(false);
             }
@@ -88,7 +96,7 @@ public class MyRealmDataBaseManager implements DataBaseManager {
             @Override
             public void execute(Realm realm) {
                 ListEntry listEntry = realm.where(ListEntry.class)
-                        .equalTo("id", id)
+                        .equalTo(ID, id)
                         .findFirst();
                 listEntry.setChecked(checked);
             }
@@ -101,7 +109,7 @@ public class MyRealmDataBaseManager implements DataBaseManager {
             @Override
             public void execute(Realm realm) {
                 RealmResults<ListEntry> completed = realm.where(ListEntry.class)
-                        .equalTo("checked", true)
+                        .equalTo(CHECKED, true)
                         .findAll();
                 for (ListEntry entry : completed) {
                     entry.setArchived(true);
@@ -116,7 +124,7 @@ public class MyRealmDataBaseManager implements DataBaseManager {
             @Override
             public void execute(Realm realm) {
                 RealmResults<ListEntry> deleted = realm.where(ListEntry.class)
-                        .equalTo("deleted", true)
+                        .equalTo(DELETED, true)
                         .findAll();
                 deleted.deleteAllFromRealm();
             }
@@ -129,8 +137,8 @@ public class MyRealmDataBaseManager implements DataBaseManager {
             @Override
             public void execute(Realm realm) {
                 RealmResults<ListEntry> archived = realm.where(ListEntry.class)
-                        .equalTo("archived", true)
-                        .equalTo("deleted", false)
+                        .equalTo(ARCHIVED, true)
+                        .equalTo(DELETED, false)
                         .findAll();
                 for (ListEntry entry : archived) {
                     entry.setArchived(false);
@@ -141,14 +149,23 @@ public class MyRealmDataBaseManager implements DataBaseManager {
 
     public RealmResults<ListEntry> getArchived() {
         return realm.where(ListEntry.class)
-                .equalTo("archived", true)
-                .equalTo("deleted", false)
+                .equalTo(ARCHIVED, true)
+                .equalTo(DELETED, false)
                 .findAll();
     }
 
     public RealmResults<ListEntry> getTrash() {
         return realm.where(ListEntry.class)
-                .equalTo("deleted", true)
+                .equalTo(DELETED, true)
                 .findAll();
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @StringDef({ID, CHECKED, ARCHIVED, DELETED})
+    public @interface COLUMNS {
+        String ID = "id";
+        String CHECKED = "checked";
+        String ARCHIVED = "archived";
+        String DELETED = "deleted";
     }
 }

@@ -34,7 +34,12 @@
 
     <string name="menu_opened">Menu opened</string>
     <string name="menu_closed">Menu closed</string>
-    <string name="menu_trash_delete_all">Delete all</string>
+    <string name="confirm_dialog_title">Erase permanently all items in the trash?</string>
+    <string name="confirm_dialog_cancel_btn">Cancel</string>
+    <string name="confirm_dialog_yes_btn">Confirm</string>
+    <string name="empty_list_title">Add your first item</string>
+    <string name="empty_archive_title">Nothing archived yet</string>
+    <string name="empty_trash_title">Nothing in the trash</string>
 
     <array name="drawer_list_items">
         <item>List</item>

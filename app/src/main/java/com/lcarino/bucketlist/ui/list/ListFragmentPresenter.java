@@ -70,7 +70,10 @@ public class ListFragmentPresenter extends MvpBasePresenter<ListView> {
     }
 
     public void emptyTrash() {
-        // TODO: display confirmation dialog before calling delete.
+        view.displayAlertDialog();
+    }
+
+    public void confirmDeleteTrash(){
         myRealmDataBaseManager.emptyTrash();
     }
 

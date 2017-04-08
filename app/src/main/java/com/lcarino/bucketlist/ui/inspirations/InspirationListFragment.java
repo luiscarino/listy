@@ -49,6 +49,11 @@ public class InspirationListFragment extends BaseFragment<ListView, ListFragment
 
     }
 
+    @Override
+    public void displayAlertDialog() {
+        
+    }
+
 
     public interface Listener {
         void setToolbarTitle(String title);

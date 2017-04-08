@@ -20,4 +20,6 @@ interface ListView : MvpView {
 
     fun showArchivedITems(results: RealmResults<ListEntry>)
 
+    fun displayAlertDialog()
+
 }
